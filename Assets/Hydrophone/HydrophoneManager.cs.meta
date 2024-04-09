@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dcd5b5f1672ae1f4ca0e8392c3d75449
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - hydrophoneTransform: {instanceID: 0}
+  - monsterSoundSource: {instanceID: 0}
+  - monsterSound: {fileID: 8300000, guid: 1c4eaf4d334e49f47bd1ad542911bce4, type: 3}
+  - interferenceSoundSource: {instanceID: 0}
+  - interferenceSound: {fileID: 8300000, guid: d1c7dbc7236f0104d91ec8f78d72e9f9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
