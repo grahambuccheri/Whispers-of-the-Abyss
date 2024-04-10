@@ -215,7 +215,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &702180827
+--- !u!1 &553989230
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,48 +223,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 702180832}
-  - component: {fileID: 702180831}
-  - component: {fileID: 702180830}
-  - component: {fileID: 702180829}
-  - component: {fileID: 702180828}
+  - component: {fileID: 553989235}
+  - component: {fileID: 553989234}
+  - component: {fileID: 553989233}
+  - component: {fileID: 553989232}
+  - component: {fileID: 553989231}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &702180828
+--- !u!114 &553989231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702180827}
+  m_GameObject: {fileID: 553989230}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8b9a201fa95449d7ac3110033cf017e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragAccelerationCoefficient: 1
+  forwardDragCoefficient: 1
+  verticalDragCoefficient: 1.5
+  rotationalDragCoefficient: 0.05
   shipSpeed: 0
   maxShipSpeed: 100
-  shipAcceleration: 12.5
+  maxShipAcceleration: 12.5
+  verticalSpeed: 0
+  maxVerticalSpeed: 10
+  maxVerticalAcceleration: 5
+  rotationSpeed: 0
+  maxRotationRate: 30
+  maxRotationAcceleration: 15
   engineRpm: 0
-  maxEngineRpm: 220
-  engineAcceleration: 50
+  maxEngineAcceleration: 0.25
+  externalDeflection: 0
+  rudderDeflection: 0
+  rudderDeflectionMaxChangeRate: 0.5
+  speedOfMaximumTurnRate: 3
+  buoyancy: 0
+  buoyancyMaxChangeRate: 0.1
   throttle: 0
-  reverseThrottle: 0
+  targetRudderDeflection: 0
+  targetBuoyancy: 0
   debugMode: 1
   debugThrottleIncrement: 0.1
---- !u!136 &702180829
-CapsuleCollider:
+  debugRudderIncrement: 0.1
+  debugBallastIncrement: 0.1
+--- !u!65 &553989232
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702180827}
+  m_GameObject: {fileID: 553989230}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -276,18 +292,16 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &702180830
+--- !u!23 &553989233
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702180827}
+  m_GameObject: {fileID: 553989230}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -323,29 +337,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &702180831
+--- !u!33 &553989234
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702180827}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &702180832
+  m_GameObject: {fileID: 553989230}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &553989235
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702180827}
+  m_GameObject: {fileID: 553989230}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117091510
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,4 +460,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 527863954}
   - {fileID: 2117091512}
-  - {fileID: 702180832}
+  - {fileID: 553989235}
