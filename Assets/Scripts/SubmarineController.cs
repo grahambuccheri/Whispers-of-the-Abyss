@@ -3,22 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR;
+using Vector3 = System.Numerics.Vector3;
 
 public class SubmarineController : MonoBehaviour
 {
     
+    // huh, all of these different sub systems are taking a similar form! something, something.. refactor.. grumble grumble..
     private CharacterController submarineController;
     [Header("Drag Coefficients")]
     [SerializeField] private float forwardDragCoefficient = 1f;
     [SerializeField] private float verticalDragCoefficient = 1.5f;
+    [SerializeField] private float rotationalDragCoefficient = 1f;
     
-    [Header("Speed parameters")]
+    [Header("Motion parameters")]
     [SerializeField] private float shipSpeed = 0f; // careful setting this directly.
     [SerializeField] private float maxShipSpeed = 100f;
     [SerializeField] private float maxShipAcceleration = 12.5f;
     [SerializeField] private float verticalSpeed = 0f; // careful setting this directly.
     [SerializeField] private float maxVerticalSpeed = 10f;
     [SerializeField] private float maxVerticalAcceleration = 5f;
+    [SerializeField] private float rotationSpeed = 0f;
+    [SerializeField] private float maxRotationRate = 30f; // degrees per second.
+    [SerializeField] private float maxRotationAcceleration = 15f;
+
     
     [Header("Engine Parameters")] // TODO change me to follow the paradigm of all others! have engine rpm go from 0 to 1. have secondary scripts map this and others like it to actual values.
     [SerializeField] private float engineRpm = 0f; // careful setting this directly. Note this is a proportion of max RPM, so if you read this for a secondary script, map it to your desired RPM range.
@@ -27,21 +34,21 @@ public class SubmarineController : MonoBehaviour
     [Header("Rudder Parameters")] 
     [SerializeField] private bool externalDeflection = false; // check this if you want to set deflection directly.
     [SerializeField] private float rudderDeflection = 0f; // careful setting this directly.
-    [SerializeField] private float maxShipRotationRate = 30f; // degrees per second.
+    [SerializeField] private float rudderDeflectionMaxChangeRate = 0.5f;
+    [SerializeField] private float speedOfMaximumTurnRate = 3f;
     // comment regarding above, if you implement a wheel for the rudder, whatever handles that can likely just directly set deflection based on its own speed stuff.
 
     [Header("Ballast Parameters")] 
     [SerializeField] private float buoyancy = 0f;
-    [SerializeField] private float fillAndDrainRate = 0.1f;
+    [SerializeField] private float buoyancyMaxChangeRate = 0.1f;
     
     [Header("Control variables")]
     [SerializeField] private float throttle = 0f;
-    [SerializeField] private bool reverseThrottle = false;
     [SerializeField] private float targetRudderDeflection = 0f;
     [SerializeField] private float targetBuoyancy = 0f;
     
     // for debug. Activate this mode to enable manual control.
-    [Header("Debug Settings")]
+    [Header("Debug Settings")] 
     [SerializeField] public bool debugMode = false;
     [SerializeField] public float debugThrottleIncrement = 0.1f;
     [SerializeField] public float debugRudderIncrement = 0.1f;
@@ -49,10 +56,10 @@ public class SubmarineController : MonoBehaviour
     
     // interface. Use these from other scripts when interacting with this script.
     
-    // Sets throttle to given target. Clamps from 0 to 1.
+    // Sets throttle to given target. Clamps from -1 to 1.
     void SetThrottle(float target)
     {
-        throttle = Mathf.Clamp(target, 0f, 1f);
+        throttle = Mathf.Clamp(target, -1f, 1f);
     }
 
     // Sets target rudder deflection. Clamps from -1 to 1.
@@ -87,7 +94,7 @@ public class SubmarineController : MonoBehaviour
         targetBuoyancy = Mathf.Clamp(target, -1, 1);
     }
     
-    // Unity functions
+    // Unity functions/internal
     
     // Start is called before the first frame update
     void Start()
@@ -98,7 +105,6 @@ public class SubmarineController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO should this be per frame or on a fixed update interval? experiment.
         UpdateState(); // throttle up the engines
         ProcessMovement(); // determine change in motion based on state
     }
@@ -124,6 +130,8 @@ public class SubmarineController : MonoBehaviour
     
     // spins engine to correct RPM given ship state.
     // this method is what throttle directly impacts.
+    // TODO why does throttle need a different paradigm??? have it go from -1 to 1 and make the calling script handle a reverse button.
+    // TODO this allows doing all three systems the same way so we can restructure all of this and downsize the script.
     void HandleThrottle()
     {
         if (debugMode)
@@ -136,28 +144,50 @@ public class SubmarineController : MonoBehaviour
             {
                 SetThrottle(throttle - debugThrottleIncrement);
             }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                reverseThrottle = !reverseThrottle;
-            }
             else if (Input.GetKeyDown(KeyCode.O))
             {
                 SetThrottle(0);
             }
         }
         
-        var direction = reverseThrottle ? -1 : 1;
-        
+        var direction = throttle > engineRpm ? 1 : -1;
+        var bound = throttle >= 0 ? throttle : -throttle;
         // if direction is opposite current RPM (aka will decrease magnitude of RPM), then we use 1 as the bound as to not clip aggressively on deceleration.
-        var bound = direction * engineRpm < 0 ? 1 : throttle;
+        bound = direction * engineRpm < 0 ? 1 : bound;
         engineRpm = Mathf.Clamp(engineRpm + (maxEngineAcceleration * direction * Time.deltaTime),
             -bound,
             bound);
     }
 
+    // has two modes of operation. if the hyperparameter externalDeflection is checked, will do nothing.
+    // if that parameter is unchecked, will move the rudder to the target deflection based on set deflection rate.
     void HandleRudder()
     {
-        // TODO UNIMPLEMENTED
+        if (externalDeflection) {return;}
+        
+        if (debugMode)
+        {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                SetTargetRudderDeflection(targetRudderDeflection + debugRudderIncrement);
+            }
+            else if (Input.GetKeyDown(KeyCode.J))
+            {
+                SetTargetRudderDeflection(targetRudderDeflection - debugRudderIncrement);
+            }
+            else if (Input.GetKeyDown(KeyCode.M))
+            {
+                SetTargetRudderDeflection(0);
+            }
+        }
+
+        var direction = targetRudderDeflection > rudderDeflection ? 1 : -1;
+        var bound = targetRudderDeflection >= 0 ? targetRudderDeflection : -targetRudderDeflection;
+        // if direction is opposite current RPM (aka will decrease magnitude of RPM), then we use 1 as the bound as to not clip aggressively on deceleration.
+        bound = direction * rudderDeflection < 0 ? 1 : bound;
+        rudderDeflection = Mathf.Clamp(rudderDeflection + (rudderDeflectionMaxChangeRate * direction * Time.deltaTime),
+            -bound,
+            bound);
     }
 
     // handles fill level of ballast. effectively the same as handle throttle with minor tweaks
@@ -181,20 +211,22 @@ public class SubmarineController : MonoBehaviour
         
         var direction = targetBuoyancy > buoyancy ? 1 : -1;
         var bound = targetBuoyancy >= 0 ? targetBuoyancy : -targetBuoyancy;
-        // if direction is opposite current RPM (aka will decrease magnitude of RPM), then we use 1 as the bound as to not clip aggressively on deceleration.
+        // for commentary on processing, see handle throttle.
         bound = direction * buoyancy < 0 ? 1 : bound;
-        buoyancy = Mathf.Clamp(buoyancy + (fillAndDrainRate * direction * Time.deltaTime),
+        buoyancy = Mathf.Clamp(buoyancy + (buoyancyMaxChangeRate * direction * Time.deltaTime),
             -bound,
             bound);
     }
 
-    // handles rudder consequences.
-    // has two modes of operation. if the hyperparameter externalDeflection is checked, will simply act on whatever the current rudder deflection is.
-    // if that parameter is unchecked, will first move the rudder to the target deflection based on set deflection rate.
-    // In either case, after rudder deflection is set, will set the rotation speed of the craft.
+    // handles rudder consequences, aka rotation induced from rudder deflection.
     void HandleAngularAccel()
     {
-        // TODO UNIMPLEMENTED
+        var angularDeltaV = GetRotationalAcceleration() * Time.deltaTime;
+
+        rotationSpeed = Mathf.Clamp(rotationSpeed + angularDeltaV, -maxRotationRate, maxRotationRate);
+
+        var netRotationalDisplacement = rotationSpeed * Time.deltaTime; // degrees to rotate
+        transform.Rotate(transform.up, netRotationalDisplacement); // TODO
     }
 
     void HandleLinearAccel()
@@ -209,8 +241,8 @@ public class SubmarineController : MonoBehaviour
         shipSpeed = Mathf.Clamp(shipSpeed + forwardDeltaV, -maxShipSpeed, maxShipSpeed);
         verticalSpeed = Mathf.Clamp(verticalSpeed + verticalDeltaV, -maxVerticalSpeed, maxVerticalSpeed);
 
-        var netMotion = shipSpeed * Time.deltaTime * Vector3.forward +
-                         verticalSpeed * Time.deltaTime * Vector3.up;
+        var netMotion = shipSpeed * Time.deltaTime * transform.forward +
+                         verticalSpeed * Time.deltaTime * transform.up;
 
         submarineController.Move(netMotion);
     }
@@ -238,6 +270,17 @@ public class SubmarineController : MonoBehaviour
         var dragAcceleration = -1 * direction * verticalDragCoefficient * (verticalSpeed * verticalSpeed);
         var netAcceleration = (buoyantAcceleration + dragAcceleration);
         return netAcceleration;
+    }
+    
+    
+    float GetRotationalAcceleration()
+    {
+        var rudderAccel = -1 * rudderDeflection * maxRotationAcceleration * (shipSpeed / speedOfMaximumTurnRate); // rudder accel is prop to both deflection and linear speed.
+        rudderAccel = Mathf.Clamp(rudderAccel, -maxRotationAcceleration, maxRotationAcceleration);
+        var direction = rotationSpeed >= 0 ? 1 : -1;
+        var dragAccel = -1 * direction * rotationalDragCoefficient * (rotationSpeed * rotationSpeed);
+        var netAccel = rudderAccel + dragAccel;
+        return netAccel;
     }
     
     // private float Normalize(float val, float min, float max)
