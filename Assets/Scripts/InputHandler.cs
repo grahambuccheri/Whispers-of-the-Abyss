@@ -25,7 +25,7 @@ public class InputHandler : MonoBehaviour
     private InputAction exitInteract;
 
     [SerializeField] private float playerSpeed = 6f;
-    [SerializeField] private float mouseSensitivity = 10f;
+    [SerializeField] private float mouseSensitivity = 100f;
 
     [SerializeField] private Camera mainCamera;
     private float cameraVerticalRotation = 0f;

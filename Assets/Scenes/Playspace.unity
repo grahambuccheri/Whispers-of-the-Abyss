@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 6
-  mouseSensitivity: 10
+  mouseSensitivity: 100
   mainCamera: {fileID: 963194227}
   interactDistance: 2.5
   distanceFromCamera: 1.2
