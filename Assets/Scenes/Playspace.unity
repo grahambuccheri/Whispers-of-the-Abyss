@@ -1742,9 +1742,8 @@ GameObject:
   - component: {fileID: 1171076651}
   - component: {fileID: 1171076650}
   - component: {fileID: 1171076649}
-  - component: {fileID: 1171076648}
   - component: {fileID: 1171076647}
-  - component: {fileID: 1171076646}
+  - component: {fileID: 1171076653}
   m_Layer: 0
   m_Name: RemoteSubmarine
   m_TagString: Untagged
@@ -1752,18 +1751,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1171076646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171076645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1031e38ead51c5942921db2247feafc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1171076647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1788,33 +1775,6 @@ MonoBehaviour:
   monsterSound: {fileID: 8300000, guid: 1c4eaf4d334e49f47bd1ad542911bce4, type: 3}
   interferenceSoundSource: {fileID: 1323702893}
   interferenceSound: {fileID: 8300000, guid: d1c7dbc7236f0104d91ec8f78d72e9f9, type: 3}
---- !u!54 &1171076648
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171076645}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1171076649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1904,6 +1864,45 @@ Transform:
   - {fileID: 970408194}
   m_Father: {fileID: 819427817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1171076653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171076645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b9a201fa95449d7ac3110033cf017e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardDragCoefficient: 1
+  verticalDragCoefficient: 1.5
+  rotationalDragCoefficient: 1
+  shipSpeed: 0
+  maxShipSpeed: 100
+  maxShipAcceleration: 12.5
+  verticalSpeed: 0
+  maxVerticalSpeed: 10
+  maxVerticalAcceleration: 5
+  rotationSpeed: 0
+  maxRotationRate: 30
+  maxRotationAcceleration: 15
+  engineRpm: 0
+  maxEngineAcceleration: 0.25
+  externalDeflection: 0
+  rudderDeflection: 0
+  rudderDeflectionMaxChangeRate: 0.5
+  speedOfMaximumTurnRate: 3
+  buoyancy: 0
+  buoyancyMaxChangeRate: 0.1
+  throttle: 0
+  targetRudderDeflection: 0
+  targetBuoyancy: 0
+  debugMode: 0
+  debugThrottleIncrement: 0.1
+  debugRudderIncrement: 0.1
+  debugBallastIncrement: 0.1
 --- !u!1001 &1211571314
 PrefabInstance:
   m_ObjectHideFlags: 0
