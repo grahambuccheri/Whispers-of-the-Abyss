@@ -6,6 +6,9 @@ TagManager:
   tags:
   - HoldableObject
   - InteractableObject
+  - MonsterNode
+  - Submarine
+  - Terrain
   layers:
   - Default
   - TransparentFX

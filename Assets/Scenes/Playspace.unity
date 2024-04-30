@@ -736,6 +736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BittenScrap
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5cfe4d59c68efe548873637820eb1c96, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1635,9 +1639,10 @@ GameObject:
   - component: {fileID: 1171076649}
   - component: {fileID: 1171076647}
   - component: {fileID: 1171076653}
+  - component: {fileID: 1171076654}
   m_Layer: 0
   m_Name: RemoteSubmarine
-  m_TagString: Untagged
+  m_TagString: Submarine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1654,7 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd5b5f1672ae1f4ca0e8392c3d75449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hydrophoneTransform: {fileID: 0}
+  hydrophoneTransform: {fileID: 834140127}
   maxDetectionDistance: 10
   maxVolume: 1
   throttleRate: 3
@@ -1794,6 +1799,19 @@ MonoBehaviour:
   debugThrottleIncrement: 0.1
   debugRudderIncrement: 0.1
   debugBallastIncrement: 0.1
+--- !u!114 &1171076654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171076645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852c69cda90784947a4b4dffd5fb5dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1001 &1211571314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3317,7 +3335,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
