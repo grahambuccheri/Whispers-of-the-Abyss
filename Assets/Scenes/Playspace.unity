@@ -1638,6 +1638,7 @@ GameObject:
   - component: {fileID: 1171076647}
   - component: {fileID: 1171076653}
   - component: {fileID: 1171076654}
+  - component: {fileID: 1171076655}
   m_Layer: 0
   m_Name: RemoteSubmarine
   m_TagString: Submarine
@@ -1809,7 +1810,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 852c69cda90784947a4b4dffd5fb5dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  onBattery: 0
+--- !u!114 &1171076655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171076645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf84d25ebd29e0488e19908b6f54d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipHealth: 0
+  batteryHealth: 0
+  reactorHealth: 100
+  motorHealth: 0
+  displayHealth: 0
 --- !u!1001 &1211571314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2487,11 +2505,11 @@ AudioEchoFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672273785}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Delay: 500
-  m_DecayRatio: 0.5
-  m_WetMix: 1
+  m_Delay: 750
+  m_DecayRatio: 0.8
+  m_WetMix: 0.57
   m_DryMix: 1
 --- !u!82 &1672273789
 AudioSource:

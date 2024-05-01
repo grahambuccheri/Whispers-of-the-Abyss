@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class EventController : MonoBehaviour
 {
-    public int maxHealth = 100;
-
-    private int currentHealth;
+    public bool onBattery;
+    string randomDirection;
+    string componentToDamage;
 
     // Arrays of components available to damage from each direction
     string[] frontComponents = {"Cameras"};
     string[] backComponents = {"Reactor", "Motor"};
     string[] leftComponents = { "Batteries" , "Reactor" , "Motor" };
     string[] rightComponents = { "Batteries" , "Reactor" , "Motor" };
-
+    string[] attackDirections = { "Front", "Back", "Left", "Right" };
     private void Start()
     {
-        currentHealth = maxHealth;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,15 +24,35 @@ public class EventController : MonoBehaviour
         Debug.Log("Collided With object");
         if (other.gameObject.CompareTag("MonsterNode"))
         {
+            //Check to see if you are running on battery
             Debug.Log("Object was a monster");
-            string[] attackDirections = { "Front", "Back", "Left", "Right" };
-            string randomDirection = attackDirections[Random.Range(0, attackDirections.Length)];
+            if (onBattery)
+            {
+                if (Random.value > 0.5f)
+                {
+                    randomDirection = attackDirections[Random.Range(0, attackDirections.Length)];
 
-            // Determine which ship component to damage based on the attack direction
-            string componentToDamage = GetComponentToDamage(randomDirection);
+                    // Determine which ship component to damage based on the attack direction
+                    componentToDamage = GetComponentToDamage(randomDirection);
 
-            // Apply damage to the selected component
-            DamageComponent(componentToDamage);
+                    // Apply damage to the selected component
+                    DamageComponent(componentToDamage);
+                }
+                else
+                {
+                    Debug.Log("Monster Didn't hear you");
+                }
+            }
+            else {
+                randomDirection = attackDirections[Random.Range(0, attackDirections.Length)];
+
+                // Determine which ship component to damage based on the attack direction
+                componentToDamage = GetComponentToDamage(randomDirection);
+
+                // Apply damage to the selected component
+                DamageComponent(componentToDamage);
+            }
+           
         }
     }
 
@@ -62,6 +82,9 @@ public class EventController : MonoBehaviour
 
     private void DamageComponent(string component)
     {
+        //Connect to DamageControl script
+        DamageControl damageControl = GetComponent<DamageControl>();
+
         // Calculate random damage
         int damageAmount = Random.Range(10, 50); // Random damage values
 
@@ -70,24 +93,37 @@ public class EventController : MonoBehaviour
         {
             case "Batteries":
                 Debug.Log("Batteries damaged by " + damageAmount + " points!");
+                damageControl.shipHealth -= 10;
                 // Apply damage to batteries
+                damageControl.batteryHealth -= damageAmount;
                 // Play sound from component location
                 break;
+
             case "Motor":
                 Debug.Log("Motor damaged by " + damageAmount + " points!");
+                damageControl.shipHealth -= 15;
                 // Apply damage to motor
+                damageControl.motorHealth -= damageAmount;
                 break;
+
             case "Cameras":
                 Debug.Log("Cameras damaged by " + damageAmount + " points!");
+                damageControl.shipHealth -= 5;
                 // Apply damage to cameras
+                damageControl.displayHealth -= damageAmount;
                 break;
+
             case "Reactor":
                 Debug.Log("Reactor damaged by " + damageAmount + " points!");
+                damageControl.shipHealth -= 20;
                 // Apply damage to reactor
+                damageControl.reactorHealth -= damageAmount;
                 break;
+
             default:
                 Debug.Log("Invalid component to damage!");
                 break;
         }
+        
     }
 }

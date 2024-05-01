@@ -7,7 +7,11 @@ using Vector3 = System.Numerics.Vector3;
 
 public class SubmarineController : MonoBehaviour
 {
-    
+    //Notes for noah: Can you please make it so that the battery drains when running the engine without running the reactor.
+    //If the battery drains to zero, stop the engine until it has charge again.
+    //If the battery is "broken" reduce battery charge by 50% until fixed
+    //If the Motor is broken -> Reduce max throttle to 0%
+    //If the Reactor is broken -> cannot charge battery until fixed
     // huh, all of these different sub systems are taking a similar form! something, something.. refactor.. grumble grumble..
     private CharacterController submarineController;
     [Header("Drag Coefficients")]
