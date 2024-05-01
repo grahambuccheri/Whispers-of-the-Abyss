@@ -84,6 +84,7 @@ public class EventController : MonoBehaviour
     {
         //Connect to DamageControl script
         DamageControl damageControl = GetComponent<DamageControl>();
+        AudioManager audioManager = GetComponent<AudioManager>();
 
         // Calculate random damage
         int damageAmount = Random.Range(10, 50); // Random damage values
@@ -97,6 +98,7 @@ public class EventController : MonoBehaviour
                 // Apply damage to batteries
                 damageControl.batteryHealth -= damageAmount;
                 // Play sound from component location
+                audioManager.PlayRandomAudio(audioManager.audioSources[0]);
                 break;
 
             case "Motor":
@@ -104,6 +106,8 @@ public class EventController : MonoBehaviour
                 damageControl.shipHealth -= 15;
                 // Apply damage to motor
                 damageControl.motorHealth -= damageAmount;
+                //playsound
+                audioManager.PlayRandomAudio(audioManager.audioSources[3]);
                 break;
 
             case "Cameras":
@@ -111,6 +115,8 @@ public class EventController : MonoBehaviour
                 damageControl.shipHealth -= 5;
                 // Apply damage to cameras
                 damageControl.displayHealth -= damageAmount;
+                //playsound
+                audioManager.PlayRandomAudio(audioManager.audioSources[1]);
                 break;
 
             case "Reactor":
@@ -118,6 +124,8 @@ public class EventController : MonoBehaviour
                 damageControl.shipHealth -= 20;
                 // Apply damage to reactor
                 damageControl.reactorHealth -= damageAmount;
+                //playsound
+                audioManager.PlayRandomAudio(audioManager.audioSources[2]);
                 break;
 
             default:
