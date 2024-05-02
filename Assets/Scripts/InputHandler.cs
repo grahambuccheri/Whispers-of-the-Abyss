@@ -5,7 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-interface IInteractable
+interface IInteractableShipObject
+{
+    public void interact();
+    public void disableAttributes();
+    public void enableAttributes();
+}
+
+interface IInteratableTool
 {
     public void interact();
 }
@@ -15,26 +22,30 @@ interface IInteractable
 public class InputHandler : MonoBehaviour
 {
 
-    private PlayerControls playerControls;
-    private CharacterController characterController;
+    public PlayerControls playerControls;
+    public CharacterController characterController;
 
     // Different actions we have in our input system
     private InputAction movement;
     private InputAction mouse;
     private InputAction interact;
     private InputAction exitInteract;
+    public InputAction steer;
+    public InputAction lever;
 
     [SerializeField] private float playerSpeed = 6f;
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float mouseSensitivity = 10f;
     [SerializeField] private float gravity = -9.8f;
 
-    [SerializeField] private Camera mainCamera;
+    public Camera mainCamera;
     private float cameraVerticalRotation = 0f;
 
     // Interaction and inventory variables
     [SerializeField] private float interactDistance = 2.5f;
     [SerializeField] private float distanceFromCamera = 1.2f;
     [SerializeField] private Inventory inventory;
+
+    public List<int> leverInput = new List<int>();
 
     private void Awake()
     {
@@ -50,9 +61,17 @@ public class InputHandler : MonoBehaviour
         mouse = playerControls.Default.Look;
         interact = playerControls.Default.Interact;
         exitInteract = playerControls.Default.ExitInteract;
+        steer = playerControls.Default.Steer;
+        lever = playerControls.Default.Lever;
+
 
         interact.performed += OnInteract; // Subscribe to the OnIneract method 
         exitInteract.performed += OnExitInteract; // Subscribe to the ExitIneract method 
+
+        lever.performed += OnLever;
+
+        playerControls.FindAction("Lever").Disable();
+        playerControls.FindAction("Steer").Disable();
     }
 
     private void OnDisable()
@@ -62,6 +81,7 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
+
     }
 
     void Update()
@@ -81,11 +101,14 @@ public class InputHandler : MonoBehaviour
     // HANDLING MOVEMENT METHOD
     private void Movement()
     {
+        // Check if the character controller is enabled, character controller is disabled for certain ship functions like control panel to prevent moving the character
+        if (characterController.enabled == true)
+        {
+            Vector2 readVec = movement.ReadValue<Vector2>();
+            Vector3 readVec3 = transform.right * readVec.x + transform.forward * readVec.y + transform.up * gravity;
 
-        Vector2 readVec = movement.ReadValue<Vector2>();
-        Vector3 readVec3 = transform.right * readVec.x + transform.forward * readVec.y + transform.up * gravity;
-
-        characterController.Move(readVec3 * Time.deltaTime * playerSpeed);
+            characterController.Move(readVec3 * Time.deltaTime * playerSpeed);
+        }
     }
 
     // HANDLING CAMERA FUNCTIONS TO LOOK AROUND
@@ -130,7 +153,7 @@ public class InputHandler : MonoBehaviour
 
             }
             // Raycast hits a ship/interactable object
-            else if (hitInfo.collider.gameObject.tag == "InteractableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
+            else if (hitInfo.collider.gameObject.tag == "InteractableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractableShipObject interactObj))
             {
                 // The toolflag is false in this case, this is because we know this is not an object to be carried but instead an interactable object on the ship
 
@@ -140,8 +163,9 @@ public class InputHandler : MonoBehaviour
                 inventory.interacting = true;
                 inventory.itemInteractingName = interactableObject.name;
 
+                // Call interface methods
+                interactObj.disableAttributes();
                 interactObj.interact();
-
             }
         }
     }
@@ -149,10 +173,24 @@ public class InputHandler : MonoBehaviour
     // HANDLING EXITING INTERACTIONS
     private void OnExitInteract(InputAction.CallbackContext context)
     {
+        // Check that we can exit a ship object interactable
+        if (inventory.item != null)
+        {
+
+            IInteractableShipObject interactable = inventory.item.GetComponent(typeof(IInteractableShipObject)) as IInteractableShipObject;
+
+            if (interactable != null)
+            {
+                interactable.enableAttributes();
+            }
+        }
+
         if (inventory.interacting == true)
         {
             inventory.Reset();
         }
+
+
     }
 
     // HANDLING INTERACTIONS FOR HOLDING OBJECTS
@@ -164,6 +202,12 @@ public class InputHandler : MonoBehaviour
             inventory.item.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera + mainCamera.transform.right * distanceFromCamera;
             inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
         }
+    }
+
+    private void OnLever(InputAction.CallbackContext context)
+    {
+        int leverDir = (int)context.ReadValue<float>();
+        leverInput.Add(leverDir);
     }
 
 

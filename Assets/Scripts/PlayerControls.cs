@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Steer"",
+                    ""type"": ""Value"",
+                    ""id"": ""dd7dfc7f-9369-4c31-968f-522f23e30e13"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lever"",
+                    ""type"": ""Value"",
+                    ""id"": ""840c819e-bafd-4951-b36f-50d8a96cae09"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,72 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ExitInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""AD"",
+                    ""id"": ""5303d59e-9332-4261-953c-5ace327cb27f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""abf26529-ad26-4220-abc6-d1b67a405238"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3c94b09b-73fc-4fd3-8890-bbda69db664f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""WS"",
+                    ""id"": ""d817f330-26f8-47ae-9e89-b94d87459c58"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lever"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""beca4f27-d62d-4453-a712-20396e3a1f87"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lever"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""60a8267e-6cd8-4830-93a3-04b03eb7a0d5"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lever"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -164,6 +248,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
         m_Default_Interact = m_Default.FindAction("Interact", throwIfNotFound: true);
         m_Default_ExitInteract = m_Default.FindAction("ExitInteract", throwIfNotFound: true);
+        m_Default_Steer = m_Default.FindAction("Steer", throwIfNotFound: true);
+        m_Default_Lever = m_Default.FindAction("Lever", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +315,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Look;
     private readonly InputAction m_Default_Interact;
     private readonly InputAction m_Default_ExitInteract;
+    private readonly InputAction m_Default_Steer;
+    private readonly InputAction m_Default_Lever;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +325,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Default_Look;
         public InputAction @Interact => m_Wrapper.m_Default_Interact;
         public InputAction @ExitInteract => m_Wrapper.m_Default_ExitInteract;
+        public InputAction @Steer => m_Wrapper.m_Default_Steer;
+        public InputAction @Lever => m_Wrapper.m_Default_Lever;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +348,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ExitInteract.started += instance.OnExitInteract;
             @ExitInteract.performed += instance.OnExitInteract;
             @ExitInteract.canceled += instance.OnExitInteract;
+            @Steer.started += instance.OnSteer;
+            @Steer.performed += instance.OnSteer;
+            @Steer.canceled += instance.OnSteer;
+            @Lever.started += instance.OnLever;
+            @Lever.performed += instance.OnLever;
+            @Lever.canceled += instance.OnLever;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -274,6 +370,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ExitInteract.started -= instance.OnExitInteract;
             @ExitInteract.performed -= instance.OnExitInteract;
             @ExitInteract.canceled -= instance.OnExitInteract;
+            @Steer.started -= instance.OnSteer;
+            @Steer.performed -= instance.OnSteer;
+            @Steer.canceled -= instance.OnSteer;
+            @Lever.started -= instance.OnLever;
+            @Lever.performed -= instance.OnLever;
+            @Lever.canceled -= instance.OnLever;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -297,5 +399,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnExitInteract(InputAction.CallbackContext context);
+        void OnSteer(InputAction.CallbackContext context);
+        void OnLever(InputAction.CallbackContext context);
     }
 }
