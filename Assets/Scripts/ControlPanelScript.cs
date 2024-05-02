@@ -15,7 +15,6 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
     [SerializeField] private Vector3 offset;
 
     [Header("Steering Settings")]
-    [SerializeField] private float wheelRotationValue; // Used for rotating wheel
     [SerializeField] private float wheelRotationRate; // Rate at which wheel rotates
 
     // WHEEL VALUE BELOW
@@ -68,10 +67,8 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
 
     void Start()
     {
-
         steer = inputHandlerScript.steer;
 
-        wheelRotationValue = 0f;
         leverInput = inputHandlerScript.leverInput;
 
         StartCoroutine(Lever());
@@ -86,17 +83,18 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
     private void Steer()
     {
         float wheelDirection = steer.ReadValue<float>();
+
         wheelValue += wheelDirection * wheelRotationRate * Time.deltaTime;
 
         // Wheel values from -1 to 1, inputted in submarine controls
         wheelValue = Mathf.Clamp(wheelValue, -1f, 1f);
 
-        wheelRotationValue = wheelValue * 180f; // Scale by 180
-
-        wheel.transform.localRotation = Quaternion.Euler(wheel.transform.localEulerAngles.x, wheel.transform.localEulerAngles.y, -wheelRotationValue);
-
+        // Scale the z rotation by 90 to limit from -90 to 90 degrees
+        wheel.transform.localEulerAngles = new Vector3(-90, 180, wheelValue * 90);
     }
 
+    // This method is highly inspired by the inchworm project. It takes in a queue of direction (up and down, W and S resoectively) and reads it
+    // One by one.
     private IEnumerator Lever()
     {
         WaitUntil leverDir = new WaitUntil(() => leverInput.Count > 0);
@@ -108,16 +106,16 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
             int leverHead = leverInput[0];
             leverInput.RemoveAt(0);
 
-            if (leverHead == 1 && leverValue < leverMaxMin)
+            if (leverHead == 1 && leverValue < 1)
             {
                 leverValue += leverInterval;
-                leverHandle.transform.localPosition += new Vector3(0, 0, leverInterval);
+                leverHandle.transform.localPosition += new Vector3(0, 0, leverInterval * leverMaxMin);
                 yield return new WaitForSeconds(secondLeverInterval);
             }
-            else if (leverHead == -1 && leverValue > -leverMaxMin)
+            else if (leverHead == -1 && leverValue > -1)
             {
                 leverValue -= leverInterval;
-                leverHandle.transform.localPosition -= new Vector3(0, 0, leverInterval);
+                leverHandle.transform.localPosition -= new Vector3(0, 0, leverInterval * leverMaxMin);
                 yield return new WaitForSeconds(secondLeverInterval);
             }
             else

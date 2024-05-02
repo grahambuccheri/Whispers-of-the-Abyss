@@ -301,6 +301,6 @@ public class SubmarineController : MonoBehaviour
     //     val = Mathf.Clamp(val, min, max);
     //     var norm = (val - min) / (max - min);
     //
-    //     return norm;
+    //     return (norm*2) - 1;
     // }
 }

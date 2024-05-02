@@ -76,6 +76,7 @@ public class InputHandler : MonoBehaviour
 
     private void OnDisable()
     {
+        inventory.Reset();
         playerControls.Disable(); // DISABLE PLAYER CONTROL INPUT SYSTEM
     }
 
