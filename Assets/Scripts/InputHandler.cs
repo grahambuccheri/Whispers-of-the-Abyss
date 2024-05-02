@@ -26,6 +26,7 @@ public class InputHandler : MonoBehaviour
 
     [SerializeField] private float playerSpeed = 6f;
     [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float gravity = -9.8f;
 
     [SerializeField] private Camera mainCamera;
     private float cameraVerticalRotation = 0f;
@@ -61,7 +62,6 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Lock Cursor
     }
 
     void Update()
@@ -72,6 +72,10 @@ public class InputHandler : MonoBehaviour
 
         // Update the position in which we hold the object (if the player is holding one)
         HoldObject();
+
+        // Cursor, putting this in start makes the cursor disappear in locked state
+        Cursor.lockState = CursorLockMode.Locked; // Lock Cursor
+        Cursor.visible = true;
     }
 
     // HANDLING MOVEMENT METHOD
@@ -79,7 +83,7 @@ public class InputHandler : MonoBehaviour
     {
 
         Vector2 readVec = movement.ReadValue<Vector2>();
-        Vector3 readVec3 = transform.right * readVec.x + transform.forward * readVec.y;
+        Vector3 readVec3 = transform.right * readVec.x + transform.forward * readVec.y + transform.up * gravity;
 
         characterController.Move(readVec3 * Time.deltaTime * playerSpeed);
     }
