@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f001387576390894b918f51f9de880ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fireExtinguisher: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - SO: {fileID: 11400000, guid: 8498ed678c3ca0b43a4fd3ba2520fe30, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

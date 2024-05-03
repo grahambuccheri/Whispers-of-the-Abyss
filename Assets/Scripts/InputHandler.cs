@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Interface for any ship object. 
+// A ship object MAY want us to freeze the user's camera or movement, hence the 
+// disableAttributes and vice versa for enabling/turning attributes back on.
 interface IInteractableShipObject
 {
     public void interact();
@@ -12,9 +15,15 @@ interface IInteractableShipObject
     public void enableAttributes();
 }
 
-interface IInteratableTool
+// Interface for any tool object.
+// Each tool has a scriptable object named ToolData where we can initialize or
+// change its parameters such as its name, offset, rotation, etc. As well it
+// has an interact method meant for interacting with ship objects
+interface IInteractableTool
 {
+    public ToolData data { get; set; }
     public void interact();
+    public void stopInteract();
 }
 
 
@@ -30,6 +39,8 @@ public class InputHandler : MonoBehaviour
     private InputAction mouse;
     private InputAction interact;
     private InputAction exitInteract;
+    private InputAction click;
+
     public InputAction steer;
     public InputAction lever;
 
@@ -42,7 +53,6 @@ public class InputHandler : MonoBehaviour
 
     // Interaction and inventory variables
     [SerializeField] private float interactDistance = 2.5f;
-    [SerializeField] private float distanceFromCamera = 1.2f;
     [SerializeField] private Inventory inventory;
 
     public List<int> leverInput = new List<int>();
@@ -63,6 +73,7 @@ public class InputHandler : MonoBehaviour
         exitInteract = playerControls.Default.ExitInteract;
         steer = playerControls.Default.Steer;
         lever = playerControls.Default.Lever;
+        click = playerControls.Default.Click;
 
 
         interact.performed += OnInteract; // Subscribe to the OnIneract method 
@@ -137,21 +148,18 @@ public class InputHandler : MonoBehaviour
         // If the raycast is valid and we we are not currently interacting with anything right now
         if (Physics.Raycast(r, out RaycastHit hitInfo, interactDistance) && inventory.interacting == false)
         {
-            // if (hitInfo.collider.gameObject.tag == "HoldableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
-            // {
-            //     holdableObject = hitInfo.collider.gameObject;
-            // }
 
             // Raycast hits a holdable object
-            if (hitInfo.collider.gameObject.tag == "HoldableObject")
+            if (hitInfo.collider.gameObject.tag == "HoldableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractableTool toolObj))
             {
+                // Set inventory attributes
                 GameObject holdableObject = hitInfo.collider.gameObject;
                 inventory.item = holdableObject;
 
                 inventory.interacting = true;
                 inventory.toolFlag = true;
-                inventory.itemInteractingName = holdableObject.name;
 
+                inventory.itemInteractingName = toolObj.data.toolName;
             }
             // Raycast hits a ship/interactable object
             else if (hitInfo.collider.gameObject.tag == "InteractableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractableShipObject interactObj))
@@ -178,11 +186,20 @@ public class InputHandler : MonoBehaviour
         if (inventory.item != null)
         {
 
-            IInteractableShipObject interactable = inventory.item.GetComponent(typeof(IInteractableShipObject)) as IInteractableShipObject;
+            IInteractableShipObject interactableShip = inventory.item.GetComponent(typeof(IInteractableShipObject)) as IInteractableShipObject;
 
-            if (interactable != null)
+            // Stop any interaction with the ship object
+            if (interactableShip != null)
             {
-                interactable.enableAttributes();
+                interactableShip.enableAttributes();
+            }
+
+            IInteractableTool interactableItem = inventory.item.GetComponent(typeof(IInteractableTool)) as IInteractableTool;
+
+            // Stop any interaction with the ship object
+            if (interactableItem != null)
+            {
+                interactableItem.stopInteract();
             }
         }
 
@@ -197,11 +214,49 @@ public class InputHandler : MonoBehaviour
     // HANDLING INTERACTIONS FOR HOLDING OBJECTS
     private void HoldObject()
     {
+        // Checks if we can hold an object
         if (inventory.item != null && inventory.toolFlag == true)
         {
-            inventory.item.transform.parent = transform;
-            inventory.item.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera + mainCamera.transform.right * distanceFromCamera;
-            inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
+
+            // The code after this checks and detects for any clicks. If clicks
+            // are detected, we can call the objects interact method due to 
+            // interfaces.
+            IInteractableTool interactable = inventory.item.GetComponent(typeof(IInteractableTool)) as IInteractableTool;
+
+            if (interactable != null)
+            {
+                // Set the objects parent
+                inventory.item.transform.parent = transform;
+
+                // Grab the object's offset and rotation
+                Vector3 offset = interactable.data.toolOffset;
+                float distanceFromCamera = interactable.data.distanceFromCamera;
+                Vector3 rotation = interactable.data.toolRotation;
+
+                // Set the objects position and apply offset/rotation
+
+                // inventory.item.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera + mainCamera.transform.right * distanceFromCamera;
+
+
+                // First position the object close to the camera
+                inventory.item.transform.position = mainCamera.transform.position + mainCamera.transform.forward + mainCamera.transform.right;
+                // Then apply a local offset
+                inventory.item.transform.localPosition += offset;
+
+                // Set the objects rotation
+                inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation + rotation.x, rotation.y, rotation.z);
+
+
+                float readClick = click.ReadValue<float>();
+                if (readClick == 1f)
+                {
+                    interactable.interact();
+                }
+                else if (readClick == 0f)
+                {
+                    interactable.stopInteract();
+                }
+            }
         }
     }
 
@@ -210,6 +265,4 @@ public class InputHandler : MonoBehaviour
         int leverDir = (int)context.ReadValue<float>();
         leverInput.Add(leverDir);
     }
-
-
 }

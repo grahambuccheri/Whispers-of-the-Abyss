@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Value"",
+                    ""id"": ""d5d59aa2-0062-401c-b31d-fcf7ae416dc0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Lever"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbf1b2a1-d72c-4467-a2c6-e86ff8dd606d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Default_ExitInteract = m_Default.FindAction("ExitInteract", throwIfNotFound: true);
         m_Default_Steer = m_Default.FindAction("Steer", throwIfNotFound: true);
         m_Default_Lever = m_Default.FindAction("Lever", throwIfNotFound: true);
+        m_Default_Click = m_Default.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_ExitInteract;
     private readonly InputAction m_Default_Steer;
     private readonly InputAction m_Default_Lever;
+    private readonly InputAction m_Default_Click;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -327,6 +349,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @ExitInteract => m_Wrapper.m_Default_ExitInteract;
         public InputAction @Steer => m_Wrapper.m_Default_Steer;
         public InputAction @Lever => m_Wrapper.m_Default_Lever;
+        public InputAction @Click => m_Wrapper.m_Default_Click;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -354,6 +377,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Lever.started += instance.OnLever;
             @Lever.performed += instance.OnLever;
             @Lever.canceled += instance.OnLever;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -376,6 +402,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Lever.started -= instance.OnLever;
             @Lever.performed -= instance.OnLever;
             @Lever.canceled -= instance.OnLever;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -401,5 +430,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnExitInteract(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnLever(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }
