@@ -95,6 +95,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
 
     // This method is highly inspired by the inchworm project. It takes in a queue of direction (up and down, W and S resoectively) and reads it
     // One by one.
+    // TODO add animation between phases
     private IEnumerator Lever()
     {
         WaitUntil leverDir = new WaitUntil(() => leverInput.Count > 0);

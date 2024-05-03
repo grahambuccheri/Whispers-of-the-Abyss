@@ -63,6 +63,21 @@ public class SubmarineController : MonoBehaviour
     [SerializeField] public float debugRudderIncrement = 0.1f;
     [SerializeField] public float debugBallastIncrement = 0.1f;
     
+    // Unity functions/internal
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        submarineController = gameObject.AddComponent<CharacterController>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateState(); // throttle up the engines
+        ProcessMovement(); // determine change in motion based on state
+    }
+    
     // interface. Use these from other scripts when interacting with this script.
     
     // Sets throttle to given target. Clamps from -1 to 1.
@@ -144,21 +159,6 @@ public class SubmarineController : MonoBehaviour
     public void SetBuoyancyLock(bool setting)
     {
         lockBuoyancy = setting;
-    }
-    
-    // Unity functions/internal
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        submarineController = gameObject.AddComponent<CharacterController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateState(); // throttle up the engines
-        ProcessMovement(); // determine change in motion based on state
     }
     
     // internal processing. don't touch unless you know what you're doing lol.
