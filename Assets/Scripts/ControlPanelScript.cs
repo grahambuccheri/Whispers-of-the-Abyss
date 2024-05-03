@@ -82,7 +82,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
 
     private void Steer()
     {
-        float wheelDirection = steer.ReadValue<float>();
+        float wheelDirection = -steer.ReadValue<float>();
 
         wheelValue += wheelDirection * wheelRotationRate * Time.deltaTime;
 
@@ -90,7 +90,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         wheelValue = Mathf.Clamp(wheelValue, -1f, 1f);
 
         // Scale the z rotation by 90 to limit from -90 to 90 degrees
-        wheel.transform.localEulerAngles = new Vector3(-90, 180, wheelValue * 90);
+        wheel.transform.localEulerAngles = new Vector3(-90, 180, -wheelValue * 90);
     }
 
     // This method is highly inspired by the inchworm project. It takes in a queue of direction (up and down, W and S resoectively) and reads it
