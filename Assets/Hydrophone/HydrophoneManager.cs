@@ -7,7 +7,7 @@ public class HydrophoneStation : MonoBehaviour
     //TODO: Handle more precise interference
     //TODO: Implement randomized monster noise -> Grab from specific monster object
     public Transform hydrophoneTransform; // The position and rotation of the hydrophone
-    public float maxDetectionDistance = 10f; // Maximum distance for detection
+    public float maxDetectionDistance = 20000f; // Maximum distance for detection
     public float maxVolume = 0.5f; // Maximum volume for the sound
     public float throttleRate = 3f; // Throttle rate
     public float rotationAngle = 0f; //Rotation angle of the hydrophone
@@ -60,20 +60,36 @@ public class HydrophoneStation : MonoBehaviour
 
             foreach (GameObject node in monsterNodes)
             {
-                // Calculate direction to the monsterNode
-                Vector3 directionToNode = node.transform.position - hydrophoneTransform.position;
-
-                // Calculate distance to the monsterNode
-                float distanceToNode = directionToNode.magnitude;
-
-                // Calculate angle between the forward direction of the hydrophone and the direction to the monsterNode
-                float angleToNode = Vector3.Angle(hydrophoneTransform.forward, directionToNode);
-
-                // Check if the monsterNode is within detection range and within the listening angle
-                if (distanceToNode <= maxDetectionDistance && angleToNode <= 60f)
+                Collider[] colliders = node.GetComponentsInChildren<Collider>();
+                float closestDistance = Mathf.Infinity;
+                Vector3 closestPoint = Vector3.zero;
+                foreach (Collider collider in colliders)
                 {
+                    // Calculate the closest point on the collider to the hydrophone
+                    Vector3 closestPointOnCollider = collider.ClosestPointOnBounds(hydrophoneTransform.position);
+
+                    // Calculate the distance to this closest point
+                    float distanceToCollider = Vector3.Distance(hydrophoneTransform.position, closestPointOnCollider);
+
+                    // Update the closest distance and point if this is closer
+                    if (distanceToCollider < closestDistance)
+                    {
+                        closestDistance = distanceToCollider;
+                        closestPoint = closestPointOnCollider;
+                    }
+                }
+                // Calculate direction to the monsterNode
+                Vector3 directionToClosestPoint = closestPoint - hydrophoneTransform.position;
+
+                // Calculate angle between the forward direction of the hydrophone and the direction to the closest point
+                float angleToClosestPoint = Vector3.Angle(hydrophoneTransform.forward, directionToClosestPoint);
+
+                // Check if the closest point is within detection range and within the listening angle
+                if (closestDistance <= maxDetectionDistance  && angleToClosestPoint <= 60f)
+                {
+                    Debug.LogWarning("Hydrophone sees monster at " + closestDistance + " distance and angle :" + angleToClosestPoint);
                     // Calculate volume based on distance
-                    volume = Mathf.Clamp01(1f - (angleToNode/30)*(distanceToNode / maxDetectionDistance)) * maxVolume;
+                    volume = Mathf.Clamp01(1f - (angleToClosestPoint / 30)*(closestDistance / maxDetectionDistance)) * maxVolume;
 
                     // Keep track of the loudest volume
                     if (volume >= loudestVolume)
