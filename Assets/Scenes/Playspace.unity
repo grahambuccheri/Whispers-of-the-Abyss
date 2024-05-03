@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.003995701, g: 0.00021792616, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7576,6 +7576,7 @@ GameObject:
   - component: {fileID: 1171076654}
   - component: {fileID: 1171076655}
   - component: {fileID: 1171076656}
+  - component: {fileID: 1171076657}
   m_Layer: 0
   m_Name: RemoteSubmarine
   m_TagString: Submarine
@@ -7790,6 +7791,19 @@ MonoBehaviour:
   - {fileID: 1100243677}
   - {fileID: 1949586446}
   - {fileID: 332056469}
+--- !u!114 &1171076657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171076645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bedef5ed6e04154998a5c1c9aeb729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelObject: {fileID: 899160484}
 --- !u!1001 &1211571314
 PrefabInstance:
   m_ObjectHideFlags: 0

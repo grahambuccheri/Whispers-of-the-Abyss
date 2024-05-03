@@ -14,8 +14,6 @@ using UnityEngine;
 // This script acts as a consolidated path to rectify this.
 // In this specific example, we may have the brain listen for destruction and repairs, and have it set the throttle to zero and lock
 // on a destruction event, and unlock throttle and set to current control panel throttle on repair.
-[RequireComponent(typeof(SubmarineController))]
-[RequireComponent(typeof(ControlPanelScript))]
 public class SubmarineBrain : MonoBehaviour
 {
     [SerializeField] private GameObject panelObject;
