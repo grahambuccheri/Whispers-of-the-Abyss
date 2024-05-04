@@ -41,8 +41,10 @@ public class InputHandler : MonoBehaviour
     private InputAction exitInteract;
     private InputAction click;
 
+
     public InputAction steer;
     public InputAction lever;
+    public InputAction heightLever;
 
     [SerializeField] private float playerSpeed = 6f;
     [SerializeField] private float mouseSensitivity = 10f;
@@ -56,6 +58,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private Inventory inventory;
 
     public List<int> leverInput = new List<int>();
+    public List<int> heightLeverInput = new List<int>();
 
     private void Awake()
     {
@@ -67,12 +70,18 @@ public class InputHandler : MonoBehaviour
     {
         playerControls.Enable(); // ENABLE PLAYER CONTROL INPUT SYSTEM
 
+        // Regular player actions
         movement = playerControls.Default.Move;
         mouse = playerControls.Default.Look;
         interact = playerControls.Default.Interact;
         exitInteract = playerControls.Default.ExitInteract;
+
+        // Control Panel actions
         steer = playerControls.Default.Steer;
         lever = playerControls.Default.Lever;
+        heightLever = playerControls.Default.HeightLever;
+
+        // Holdable Object actions
         click = playerControls.Default.Click;
 
 
@@ -80,8 +89,10 @@ public class InputHandler : MonoBehaviour
         exitInteract.performed += OnExitInteract; // Subscribe to the ExitIneract method 
 
         lever.performed += OnLever;
+        heightLever.performed += OnHeightLever;
 
         playerControls.FindAction("Lever").Disable();
+        playerControls.FindAction("HeightLever").Disable();
         playerControls.FindAction("Steer").Disable();
     }
 
@@ -260,9 +271,16 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    // Handles input for both levers
     private void OnLever(InputAction.CallbackContext context)
     {
         int leverDir = (int)context.ReadValue<float>();
         leverInput.Add(leverDir);
+    }
+
+    private void OnHeightLever(InputAction.CallbackContext context)
+    {
+        int leverDir = (int)context.ReadValue<float>();
+        heightLeverInput.Add(leverDir);
     }
 }

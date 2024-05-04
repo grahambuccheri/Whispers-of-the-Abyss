@@ -89,6 +89,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HeightLever"",
+                    ""type"": ""Value"",
+                    ""id"": ""241ae7be-04ee-46df-9f58-fec1f5257012"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Ctrl/Shift"",
+                    ""id"": ""e149d9fd-f8b2-4a83-a503-50c1e79f3f78"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeightLever"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cc67c25c-678e-496d-99fe-1c3ef4627f0a"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeightLever"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d0ee738c-0d46-4c77-873c-9d7d8bc6732c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeightLever"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -271,6 +313,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Default_Steer = m_Default.FindAction("Steer", throwIfNotFound: true);
         m_Default_Lever = m_Default.FindAction("Lever", throwIfNotFound: true);
         m_Default_Click = m_Default.FindAction("Click", throwIfNotFound: true);
+        m_Default_HeightLever = m_Default.FindAction("HeightLever", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +382,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Steer;
     private readonly InputAction m_Default_Lever;
     private readonly InputAction m_Default_Click;
+    private readonly InputAction m_Default_HeightLever;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -350,6 +394,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Steer => m_Wrapper.m_Default_Steer;
         public InputAction @Lever => m_Wrapper.m_Default_Lever;
         public InputAction @Click => m_Wrapper.m_Default_Click;
+        public InputAction @HeightLever => m_Wrapper.m_Default_HeightLever;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -380,6 +425,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @HeightLever.started += instance.OnHeightLever;
+            @HeightLever.performed += instance.OnHeightLever;
+            @HeightLever.canceled += instance.OnHeightLever;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -405,6 +453,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @HeightLever.started -= instance.OnHeightLever;
+            @HeightLever.performed -= instance.OnHeightLever;
+            @HeightLever.canceled -= instance.OnHeightLever;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -431,5 +482,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSteer(InputAction.CallbackContext context);
         void OnLever(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnHeightLever(InputAction.CallbackContext context);
     }
 }
