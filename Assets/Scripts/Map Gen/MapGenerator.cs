@@ -48,6 +48,7 @@ namespace Map_Gen
 
             // hierarchy cleanup
             mapObjectParent = new GameObject("Map Objects");
+            mapObjectParent.transform.SetParent(this.transform);
             
             spawnLocations = new List<Vector3>();
             
@@ -63,9 +64,9 @@ namespace Map_Gen
             // this is the real processing, the below function calls create the terrain and populate it.
             terrain.terrainData = GenerateTerrain(terrain.terrainData);
             terrain.terrainData = GenerateStartingArea(terrain.terrainData);
-            //GenerateSpawnLocations(); TODO uncomment me
+            GenerateSpawnLocations(); 
             //IllustrateSpawnLocationsDebug();
-            //PopulateSpawnLocations(); // TODO uncomment me
+            PopulateSpawnLocations();
         }
 
         // Update is called once per frame
