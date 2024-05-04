@@ -9,11 +9,12 @@ TagManager:
   - MonsterNode
   - Submarine
   - Terrain
+  - PlayerObject
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - DontBlock
   - Water
   - UI
   - 

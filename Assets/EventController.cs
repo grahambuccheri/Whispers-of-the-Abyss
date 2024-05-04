@@ -83,8 +83,18 @@ public class EventController : MonoBehaviour
     private void DamageComponent(string component)
     {
         //Connect to DamageControl script
-        DamageControl damageControl = GetComponent<DamageControl>();
+       
+    DamageControl damageControl = GetComponent<DamageControl>();
         AudioManager audioManager = GetComponent<AudioManager>();
+        //grab the palayer model so we can do some camera shake
+        InputHandler inputHandler = null;
+
+        GameObject playerObject = GameObject.FindWithTag("PlayerObject");
+
+        if (playerObject != null)
+        {
+             inputHandler = playerObject.GetComponent<InputHandler>();
+        }
 
         // Calculate random damage
         int damageAmount = Random.Range(10, 50); // Random damage values
@@ -99,6 +109,7 @@ public class EventController : MonoBehaviour
                 damageControl.batteryHealth -= damageAmount;
                 // Play sound from component location
                 audioManager.PlayRandomAudio(audioManager.audioSources[0]);
+                inputHandler.CameraShake();
                 break;
 
             case "Motor":
@@ -108,6 +119,7 @@ public class EventController : MonoBehaviour
                 damageControl.motorHealth -= damageAmount;
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[3]);
+                inputHandler.CameraShake();
                 break;
 
             case "Cameras":
@@ -117,6 +129,7 @@ public class EventController : MonoBehaviour
                 damageControl.displayHealth -= damageAmount;
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[1]);
+                inputHandler.CameraShake();
                 break;
 
             case "Reactor":
@@ -126,6 +139,7 @@ public class EventController : MonoBehaviour
                 damageControl.reactorHealth -= damageAmount;
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[2]);
+                inputHandler.CameraShake();
                 break;
 
             default:

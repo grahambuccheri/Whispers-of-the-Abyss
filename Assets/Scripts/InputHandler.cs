@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
 // Interface for any ship object. 
 // A ship object MAY want us to freeze the user's camera or movement, hence the 
 // disableAttributes and vice versa for enabling/turning attributes back on.
@@ -269,6 +271,38 @@ public class InputHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    //Sorry Alex if this is in a weird spot, Just wanted to keep everything camera related on the player object.
+    public void CameraShake()
+    {
+
+        StartCoroutine(ShakeCameraCo());
+    }
+    private IEnumerator ShakeCameraCo()
+    {
+        float shakeDuration = 0.3f; // Duration of the shake in seconds
+        float shakeAmount = 0.4f; // Magnitude of the shake
+        float decreaseFactor = 1.0f; // Factor by which the shake decreases each frame
+        GameObject mc = GameObject.FindWithTag("MainCamera");
+
+        Vector3 originalPosition = mc.transform.localPosition;
+        float elapsedTime = 0.0f;
+        //delay for sound
+        yield return new WaitForSeconds(0.4f);
+
+        while (elapsedTime < shakeDuration)
+        {
+            mc.transform.localPosition = originalPosition + Random.insideUnitSphere * shakeAmount;
+
+            elapsedTime += Time.deltaTime;
+            shakeAmount *= decreaseFactor; // Decrease the shake amount each frame
+
+            yield return null;
+        }
+
+        mc.transform.localPosition = originalPosition; // Reset the camera position back to normal
     }
 
     // Handles input for both levers

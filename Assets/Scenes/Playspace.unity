@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 561687742}
   m_Layer: 0
   m_Name: PLAYER
-  m_TagString: Untagged
+  m_TagString: PlayerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1408,7 +1408,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2298,7 +2298,7 @@ GameObject:
   - component: {fileID: 963194230}
   - component: {fileID: 963194229}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7703,7 +7703,7 @@ Transform:
   m_GameObject: {fileID: 1171076645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.92, z: 0}
+  m_LocalPosition: {x: 0, y: 4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7781,11 +7781,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf84d25ebd29e0488e19908b6f54d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipHealth: 0
-  batteryHealth: 0
+  shipHealth: 100
+  batteryHealth: 100
   reactorHealth: 100
-  motorHealth: 0
-  displayHealth: 0
+  motorHealth: 100
+  displayHealth: 100
 --- !u!114 &1171076656
 MonoBehaviour:
   m_ObjectHideFlags: 0

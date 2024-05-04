@@ -87,7 +87,7 @@ public class HydrophoneStation : MonoBehaviour
                 // Check if the closest point is within detection range and within the listening angle
                 if (closestDistance <= maxDetectionDistance  && angleToClosestPoint <= 60f)
                 {
-                    Debug.LogWarning("Hydrophone sees monster at " + closestDistance + " distance and angle :" + angleToClosestPoint);
+                    //Debug.Log("Hydrophone sees monster at " + closestDistance + " distance and angle :" + angleToClosestPoint);
                     // Calculate volume based on distance
                     volume = Mathf.Clamp01(1f - (angleToClosestPoint / 30)*(closestDistance / maxDetectionDistance)) * maxVolume;
 
