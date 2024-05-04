@@ -32,5 +32,18 @@ namespace Map_Gen
 
         // Todo do we want the default to be ease in out or just linear? hmm.
         public AnimationCurve depthCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        
+        // Here are the settings for spawnpoints
+        public int maximumSpawnRadius = 16;
+
+        public int spawnPoints = 16;
+        public float exclusionRadius = 3; // distance from edge of grid squares spawns will occur in
+
+        public float maximumTolerableGradient = 0.5f; // maximum surface steepness a spawn point can occur on
+        
+        // Settings for objects to spawn
+        public SpawnableObject[] objectSelection; // list of objects which can spawn
+        public float[] spawnProbabilities; // chance of a type spawning TODO do we need this?
+        public int[] spawnLimits; // max instances of a type
     }
 }
