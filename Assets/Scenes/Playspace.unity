@@ -17974,8 +17974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: dfd7173ff0f1f7948982dd66d5471d99, type: 2}
-  eventControllerScript: {fileID: 0}
-  batteryScript: {fileID: 0}
+  eventControllerScript: {fileID: 1171076654}
+  batteryScript: {fileID: 753449344}
 --- !u!1 &1323702892
 GameObject:
   m_ObjectHideFlags: 0
