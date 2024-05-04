@@ -3,8 +3,10 @@ using UnityEngine;
 namespace Map_Gen
 {
     
+    // This is just a scriptable object for storing map settings.
+    // This allows easier use of multiple presets.
+    
     [CreateAssetMenu(menuName = "ScriptableObjects/GeneratorSetting")]
-
     public class GeneratorSetting : ScriptableObject
     {
         // size of terrain

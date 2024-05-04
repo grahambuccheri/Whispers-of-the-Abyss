@@ -3,8 +3,8 @@ using UnityEngine;
 using Random = System.Random;
 
 // This class contains some exercises in noise generation for the purposes of creating satisfying terrains.
-// The goal is to use fractal perlin noise for terrain generation of the sea bed. I would like to add a gradient modified version as well,
-// but this is quite complex.
+// The goal is to use fractal perlin noise for terrain generation of the sea bed.
+// I wanted to use gradient modified fractal perlin noise, but this was too complex given the time constraints.
 namespace Map_Gen
 {
     public static class NoiseGenerators

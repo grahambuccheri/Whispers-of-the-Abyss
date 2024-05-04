@@ -5,6 +5,18 @@ using Random = System.Random;
 
 namespace Map_Gen
 {
+    // What is this class?
+    // This class is the wrapper that does all things related to map generation.
+    // It uses an underlying fractal perlin noise function to produce a heightmap,
+    // which it then assigns to a terrain. (Side note, this script must be attached to a terrain to properly function)
+    // It also handles random and distributed spawning of a variety of gameobjects.
+    // Terrain generation settings as well as object instantiation settings and selection can be changed via the given 
+    // 'GeneratorSetting' scriptable object. This allows for multiple map generation presets.
+    //
+    // As a grading note I think this script and its associated dependencies are worthy of adding algorithmic points.
+    // The use of fractal perlin generation is non-trivial, and this script in general represents a fairly scalable approach
+    // to procedural terrain generation and object placement. It is imperfect in many ways but as a first attempt at this system,
+    // it provides a lot of utility.
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] private GameObject debugMarker;
@@ -21,10 +33,20 @@ namespace Map_Gen
         private int numRequiredSpawns;
         
         private Random rng;
+
         void Start()
         {
+            
+        }
+        
+        // this does all the map gen when called. produces a terrain out of the given terrain object.
+        // populates map objects via given scriptable setting object.
+        void LoadMap() // should some of this still happen on start?
+        {
+            // most of this is just basic initialization.
             terrain = GetComponent<Terrain>();
 
+            // hierarchy cleanup
             mapObjectParent = new GameObject("Map Objects");
             
             spawnLocations = new List<Vector3>();
@@ -34,9 +56,11 @@ namespace Map_Gen
 
             numRequiredSpawns = settings.spawnLimits.Sum();
 
+            // center our terrain around the origin
             globalOffset = new Vector3(settings.width / 2f, 0, settings.height / 2f);
             transform.localPosition -= globalOffset;
             
+            // this is the real processing, the below function calls create the terrain and populate it.
             terrain.terrainData = GenerateTerrain(terrain.terrainData);
             terrain.terrainData = GenerateStartingArea(terrain.terrainData);
             GenerateSpawnLocations();
@@ -51,6 +75,7 @@ namespace Map_Gen
             
         }
 
+        // returns a TerrainData object with the procedurally generated terrain.
         TerrainData GenerateTerrain(TerrainData terrainData)
         {
             //terrainData.heightmapResolution = settings.width;
@@ -62,6 +87,7 @@ namespace Map_Gen
             return terrainData;
         }
 
+        // finds a set of valid spawn locations as per the settings given.
         void GenerateSpawnLocations()
         {
             List<Vector3> potentialSpawnLocations = new List<Vector3>();
@@ -125,6 +151,7 @@ namespace Map_Gen
             }
         }
 
+        // fills spawn locations with objects as per settings.
         void PopulateSpawnLocations()
         {
             var typeCounts = new int[settings.objectSelection.Length];
@@ -175,6 +202,8 @@ namespace Map_Gen
             return terrainData;
         }
 
+        // gets a noise map from NoiseGenerators
+        // maps it to the tuning curve.
         float[,] GenerateAndTuneHeights()
         {
             // TODO figure out why I suffer floating point loss!
