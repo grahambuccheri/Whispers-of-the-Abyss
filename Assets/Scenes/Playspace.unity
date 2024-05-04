@@ -1091,6 +1091,15 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  heightLever:
+    m_Name: Height Lever
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 047e32e3-9b5f-442a-a75d-cc78ea12b3f0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   playerSpeed: 6
   mouseSensitivity: 100
   gravity: -9.8
@@ -1098,6 +1107,7 @@ MonoBehaviour:
   interactDistance: 2.5
   inventory: {fileID: 11400000, guid: dfd7173ff0f1f7948982dd66d5471d99, type: 2}
   leverInput: 
+  heightLeverInput: 
 --- !u!1 &620313186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b8ee479d66f983740bddb87e840c0e2c, type: 3}
@@ -7559,6 +7569,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1147232535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+  m_PrefabInstance: {fileID: 1566610990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1171076645
 GameObject:
   m_ObjectHideFlags: 0
@@ -8399,6 +8414,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 578f4588c76dbc14abfd1f0b198b9ba5, type: 3}
   m_PrefabInstance: {fileID: 1601594498}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1566610990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.7119985
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.286
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710653
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710707
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
+      propertyPath: m_Name
+      value: heightLever
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
 --- !u!1001 &1601594498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9736,6 +9824,12 @@ MonoBehaviour:
   leverHandle: {fileID: 281113897}
   leverMaxMin: 4
   leverValue: 0
+  heightLeverInput: 
+  heightLeverInterval: 0.25
+  secondHeightLeverInterval: 0.5
+  heightLeverHandle: {fileID: 1147232535}
+  heightLeverMaxMin: 4
+  heightLeverValue: 0
 --- !u!1 &2014293597
 GameObject:
   m_ObjectHideFlags: 0
@@ -10173,5 +10267,6 @@ SceneRoots:
   - {fileID: 667335316}
   - {fileID: 192151867}
   - {fileID: 675955885}
+  - {fileID: 1566610990}
   - {fileID: 1951674542}
   - {fileID: 1094797362}
