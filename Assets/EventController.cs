@@ -18,7 +18,14 @@ public class EventController : MonoBehaviour
     {
         
     }
-
+    //Coroutine to play particle effects for duration
+    private IEnumerator PlayEffectCo(GameObject target,float duration)
+    {
+        ParticleSystem system = target.GetComponent<ParticleSystem>();
+        system.Play();
+        yield return new WaitForSeconds(2.0f);
+        system.Stop();
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collided With object");
@@ -91,6 +98,20 @@ public class EventController : MonoBehaviour
 
         GameObject playerObject = GameObject.FindWithTag("PlayerObject");
 
+        
+        void PlayEffect(GameObject target)
+        {
+          if(target == null)
+            {
+                Debug.LogWarning("Target Effect does not exist");
+            }
+            else
+            {
+                Debug.Log("Sparking");
+                StartCoroutine(PlayEffectCo(target,2.0f));
+            }
+        }
+
         if (playerObject != null)
         {
              inputHandler = playerObject.GetComponent<InputHandler>();
@@ -110,6 +131,7 @@ public class EventController : MonoBehaviour
                 // Play sound from component location
                 audioManager.PlayRandomAudio(audioManager.audioSources[0]);
                 inputHandler.CameraShake();
+                PlayEffect(GameObject.Find("BatterySparks"));
                 break;
 
             case "Motor":
@@ -120,6 +142,7 @@ public class EventController : MonoBehaviour
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[3]);
                 inputHandler.CameraShake();
+                PlayEffect(GameObject.Find("MotorSparks"));
                 break;
 
             case "Cameras":
@@ -130,6 +153,7 @@ public class EventController : MonoBehaviour
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[1]);
                 inputHandler.CameraShake();
+                PlayEffect(GameObject.Find("DisplaySparks"));
                 break;
 
             case "Reactor":
@@ -140,6 +164,7 @@ public class EventController : MonoBehaviour
                 //playsound
                 audioManager.PlayRandomAudio(audioManager.audioSources[2]);
                 inputHandler.CameraShake();
+                PlayEffect(GameObject.Find("ReactorSparks"));
                 break;
 
             default:
