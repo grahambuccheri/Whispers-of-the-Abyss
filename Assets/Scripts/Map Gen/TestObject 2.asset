@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d2417c04d54c078b4591eb9bdea76, type: 3}
   m_Name: TestObject 2
   m_EditorClassIdentifier: 
-  spawnable: {fileID: 919132149155446097, guid: c29ef3e64c47f87438f2ba5d8e4c8158, type: 3}
+  spawnable: {fileID: 919132149155446097, guid: 1c9a6078f6e75754eaa1f2010f11927c, type: 3}
   spawnOffset: {x: 0, y: 0, z: 0}
   baseRotation: {x: 0, y: 0, z: 0}
-  xzVariance: 0
+  xzVariance: 20

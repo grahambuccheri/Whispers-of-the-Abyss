@@ -15,4 +15,4 @@ MonoBehaviour:
   spawnable: {fileID: 919132149155446097, guid: c29ef3e64c47f87438f2ba5d8e4c8158, type: 3}
   spawnOffset: {x: 0, y: 0, z: 0}
   baseRotation: {x: 0, y: 0, z: 0}
-  xzVariance: 0
+  xzVariance: 20

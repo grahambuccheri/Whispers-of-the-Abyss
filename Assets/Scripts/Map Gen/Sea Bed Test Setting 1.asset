@@ -21,7 +21,7 @@ MonoBehaviour:
   octaves: 4
   persistence: 0.5
   lacunarity: 1.5
-  offset: {x: 17.21, y: -11.93}
+  offset: {x: 0, y: 0}
   seed: 42
   depthCurve:
     serializedVersion: 2
@@ -89,4 +89,4 @@ MonoBehaviour:
   objectSelection:
   - {fileID: 11400000, guid: 08b04bb57bbf64b78a3fa13d022b3f3a, type: 2}
   - {fileID: 11400000, guid: 178bbd1916d8f4912b652df9b1807dca, type: 2}
-  spawnLimits: 3200000032000000
+  spawnLimits: c800000032000000

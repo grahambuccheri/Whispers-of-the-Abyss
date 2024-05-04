@@ -36,12 +36,12 @@ namespace Map_Gen
 
         void Start()
         {
-            
+            LoadMap();
         }
         
         // this does all the map gen when called. produces a terrain out of the given terrain object.
         // populates map objects via given scriptable setting object.
-        void LoadMap() // should some of this still happen on start?
+        public void LoadMap() // should some of this still happen on start?
         {
             // most of this is just basic initialization.
             terrain = GetComponent<Terrain>();
@@ -63,25 +63,28 @@ namespace Map_Gen
             // this is the real processing, the below function calls create the terrain and populate it.
             terrain.terrainData = GenerateTerrain(terrain.terrainData);
             terrain.terrainData = GenerateStartingArea(terrain.terrainData);
-            GenerateSpawnLocations();
+            //GenerateSpawnLocations(); TODO uncomment me
             //IllustrateSpawnLocationsDebug();
-            PopulateSpawnLocations();
+            //PopulateSpawnLocations(); // TODO uncomment me
         }
 
         // Update is called once per frame
         // TODO move all here in this from update to start. It's only in update to debug parameters.
         void Update()
         {
-            
+            terrain.terrainData = GenerateTerrain(terrain.terrainData);
+            terrain.terrainData = GenerateStartingArea(terrain.terrainData);
+            //settings.offset += new Vector2(2 * Time.deltaTime, 2 * Time.deltaTime); this animates the terrain, Just for fun lol.
         }
 
         // returns a TerrainData object with the procedurally generated terrain.
         TerrainData GenerateTerrain(TerrainData terrainData)
         {
-            //terrainData.heightmapResolution = settings.width;
+            terrainData.heightmapResolution = settings.width;
             terrainData.size = new Vector3(settings.width, settings.depth, settings.height);
 
             float[,] heights = GenerateAndTuneHeights();
+            Debug.Log("heights size is " + heights.Rank + " by " + heights.Length);
             
             terrainData.SetHeights(0, 0, heights);
             return terrainData;
