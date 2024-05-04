@@ -19,10 +19,11 @@ namespace Map_Gen
         }
 
         // Update is called once per frame
-        // TODO move this from update to start. It's only in update to debug parameters.
+        // TODO move all here in this from update to start. It's only in update to debug parameters.
         void Update()
         {
             terrain.terrainData = GenerateTerrain(terrain.terrainData);
+            terrain.terrainData = GenerateStartingArea(terrain.terrainData);
         }
 
         TerrainData GenerateTerrain(TerrainData terrainData)
@@ -32,6 +33,28 @@ namespace Map_Gen
 
             float[,] heights = GenerateAndTuneHeights();
             
+            terrainData.SetHeights(0, 0, heights);
+            return terrainData;
+        }
+
+        // places a mostly flat circle in the center of the terrain for the submarine to start in.
+        TerrainData GenerateStartingArea(TerrainData terrainData)
+        {
+            Vector2 circleCenter = new Vector2(settings.width / 2, settings.height / 2);
+            float[,] heights = terrainData.GetHeights(0, 0, settings.width, settings.height);
+            for (int x = 0; x < settings.width; x++)
+            {
+                for (int y = 0; y < settings.height; y++)
+                {
+                    var point = new Vector2(x, y);
+                    var distance = Vector2.Distance(point, circleCenter);
+                    var radiusProportion = distance / settings.startRadius;
+                    if (distance <= settings.startRadius)
+                    {
+                        heights[x, y] *= Mathf.Pow(radiusProportion, settings.startPow);
+                    }
+                }
+            }
             terrainData.SetHeights(0, 0, heights);
             return terrainData;
         }

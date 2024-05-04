@@ -7,9 +7,15 @@ namespace Map_Gen
 
     public class GeneratorSetting : ScriptableObject
     {
+        // size of terrain
         public int width = 256;
         public int height = 256;
+        
+        // starting area parameters
+        public int startRadius = 10;
+        public int startPow = 3; // aggressiveness of flattening
 
+        // terrain parameters
         public int depth = 10;
 
         public float scale = 5;

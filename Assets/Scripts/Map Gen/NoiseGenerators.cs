@@ -9,15 +9,16 @@ namespace Map_Gen
     public static class NoiseGenerators
     {
         // produces a fractal perlin noise map  with a given number of octaves
+        // TODO i am uncertain why, but this method results in jagged terrain maps, whereas standard perlin does not. even with one octave!
         public static float[,] GenerateFractalPerlinMap(int seed, int width, int height, float scale, Vector2 offset,
             int octaves, float lacunarity, float persistence)
         {
             float[,] heights = new float[width, height];
-            
-            float maxHeight = 0;
-            float minHeight = float.MaxValue;
-            float amplitude = 1;
-            float frequency = 1;
+
+            double maxHeight = 0;
+            double minHeight = double.MaxValue;
+            double amplitude = 1;
+            double frequency = 1;
 
             Random rng = new Random(seed);
             
@@ -35,14 +36,14 @@ namespace Map_Gen
             {
                 // create the next height map layer
                 Vector2 layerOffset = new Vector2(rng.Next(0, 500000) + offset.x, rng.Next(0, 500000) + offset.y);
-                float[,] mapIteration = GeneratePerlinMap(seed, width, height, scale * frequency, layerOffset);
+                float[,] mapIteration = GeneratePerlinMap(seed, width, height, (float)(scale * frequency), layerOffset);
                 
                 // add this layer to cumulative product
                 for (int i = 0; i < width; i++)
                 {
                     for (int j = 0; j < height; j++)
                     {
-                        heights[i, j] += mapIteration[i, j] * amplitude;
+                        heights[i, j] += (float)(mapIteration[i, j] * amplitude);
                         if (heights[i, j] > maxHeight)
                         {
                             maxHeight = heights[i, j];
@@ -64,7 +65,7 @@ namespace Map_Gen
             {
                 for (int j = 0; j < height; j++)
                 {
-                    heights[i, j] = (heights[i, j] - minHeight) / (maxHeight - minHeight);
+                    heights[i, j] = (float)((heights[i, j] - minHeight) / (maxHeight - minHeight)); // voodoo magic with doubles to reduce loss.
                 }
             }
 
