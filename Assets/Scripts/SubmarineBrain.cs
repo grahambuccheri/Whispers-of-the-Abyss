@@ -52,7 +52,7 @@ public class SubmarineBrain : MonoBehaviour
 
         if (!buoyancyLockState)
         {
-            // nothing here yet
+            submarineController.SetTargetBuoyancy(controlPanel.heightLeverValue);
         }
     }
 }
