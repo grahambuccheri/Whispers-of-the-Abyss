@@ -49,6 +49,8 @@ namespace Map_Gen
             // hierarchy cleanup
             mapObjectParent = new GameObject("Map Objects");
             mapObjectParent.transform.SetParent(this.transform);
+            mapObjectParent.transform.localPosition = new Vector3(mapObjectParent.transform.localPosition.x, 0,
+                mapObjectParent.transform.localPosition.z);
             
             spawnLocations = new List<Vector3>();
             
@@ -85,7 +87,6 @@ namespace Map_Gen
             terrainData.size = new Vector3(settings.width, settings.depth, settings.height);
 
             float[,] heights = GenerateAndTuneHeights();
-            Debug.Log("heights size is " + heights.Rank + " by " + heights.Length);
             
             terrainData.SetHeights(0, 0, heights);
             return terrainData;
