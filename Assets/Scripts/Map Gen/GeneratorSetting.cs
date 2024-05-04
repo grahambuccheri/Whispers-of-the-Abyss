@@ -18,7 +18,7 @@ namespace Map_Gen
         // terrain parameters
         public int depth = 10;
 
-        public float scale = 5;
+        public double scale = 5;
         
         // fractal parameters
         public int octaves = 4;
@@ -36,14 +36,14 @@ namespace Map_Gen
         // Here are the settings for spawnpoints
         public int maximumSpawnRadius = 16;
 
-        public int spawnPoints = 16;
+        //public int spawnPoints = 16;
         public float exclusionRadius = 3; // distance from edge of grid squares spawns will occur in
 
         public float maximumTolerableGradient = 0.5f; // maximum surface steepness a spawn point can occur on
         
         // Settings for objects to spawn
         public SpawnableObject[] objectSelection; // list of objects which can spawn
-        public float[] spawnProbabilities; // chance of a type spawning TODO do we need this?
+        //public float[] spawnProbabilities; // chance of a type spawning TODO do we need this?
         public int[] spawnLimits; // max instances of a type
     }
 }
