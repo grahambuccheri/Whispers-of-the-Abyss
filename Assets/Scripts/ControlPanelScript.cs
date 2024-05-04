@@ -21,7 +21,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
     [SerializeField] public float wheelValue; // Clamped Value from -1 to 1
     [SerializeField] private GameObject wheel;
 
-    [Header("Lever Settings")]
+    [Header("Throttle Lever Settings")]
     [SerializeField] private List<int> leverInput;
     [SerializeField] private float leverInterval; // Interval between each lever press
     [SerializeField] private float secondLeverInterval; // Time between each lever press
@@ -30,7 +30,14 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
     [SerializeField] private int leverMaxMin;
     public float leverValue;
 
+    [Header("Height Lever Settings")]
+    [SerializeField] private List<int> heightLeverInput;
+    [SerializeField] private float heightLeverInterval; // Interval between each hheight lever press
+    [SerializeField] private float secondHeightLeverInterval; // Time between each height lever press
 
+    [SerializeField] private GameObject heightLeverHandle;
+    [SerializeField] private int heightLeverMaxMin;
+    public float heightLeverValue;
 
 
     public void disableAttributes()
@@ -42,6 +49,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         // Enable the steering and lever actions
         inputHandlerScript.playerControls.FindAction("Steer").Enable();
         inputHandlerScript.playerControls.FindAction("Lever").Enable();
+        inputHandlerScript.playerControls.FindAction("HeightLever").Enable();
 
         // Handle player position in front of the control panel
         targetPlayerPosition = transform.position + offset;
@@ -63,6 +71,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         // Disable the steering and lever actions
         inputHandlerScript.playerControls.FindAction("Steer").Disable();
         inputHandlerScript.playerControls.FindAction("Lever").Disable();
+        inputHandlerScript.playerControls.FindAction("HeightLever").Disable();
     }
 
     void Start()
@@ -70,8 +79,10 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         steer = inputHandlerScript.steer;
 
         leverInput = inputHandlerScript.leverInput;
+        heightLeverInput = inputHandlerScript.heightLeverInput;
 
         StartCoroutine(Lever());
+        StartCoroutine(HeightLever());
     }
 
     // Update is called once per frame
@@ -118,6 +129,37 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
                 leverValue -= leverInterval;
                 leverHandle.transform.localPosition -= new Vector3(0, 0, leverInterval * leverMaxMin);
                 yield return new WaitForSeconds(secondLeverInterval);
+            }
+            else
+            {
+                yield return null;
+            }
+
+        }
+    }
+
+    private IEnumerator HeightLever()
+    {
+        WaitUntil leverDir = new WaitUntil(() => heightLeverInput.Count > 0);
+
+        while (true)
+        {
+            yield return leverDir;
+
+            int leverHead = heightLeverInput[0];
+            heightLeverInput.RemoveAt(0);
+
+            if (leverHead == 1 && heightLeverValue < 1)
+            {
+                heightLeverValue += heightLeverInterval;
+                heightLeverHandle.transform.localPosition += new Vector3(0, 0, heightLeverInterval * heightLeverMaxMin);
+                yield return new WaitForSeconds(secondHeightLeverInterval);
+            }
+            else if (leverHead == -1 && heightLeverValue > -1)
+            {
+                heightLeverValue -= heightLeverInterval;
+                heightLeverHandle.transform.localPosition -= new Vector3(0, 0, heightLeverInterval * heightLeverMaxMin);
+                yield return new WaitForSeconds(secondHeightLeverInterval);
             }
             else
             {
