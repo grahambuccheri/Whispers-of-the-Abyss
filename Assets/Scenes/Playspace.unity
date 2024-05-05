@@ -530,6 +530,7 @@ MonoBehaviour:
   fireExtinguisher: {fileID: 1114705424}
   fireExtinguisherJuice: 100
   fireExtinguisherDecreaseRate: 10
+  damageControl: {fileID: 1171076655}
   mainCamera: {fileID: 963194227}
   SO: {fileID: 11400000, guid: 8498ed678c3ca0b43a4fd3ba2520fe30, type: 2}
 --- !u!1001 &192151867
@@ -22761,7 +22762,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.652, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32961,6 +32962,10 @@ MonoBehaviour:
   fireValue: 0
   brokenValue: 0
   submarineController: {fileID: 1171076653}
+  batteryObject: {fileID: 620313186}
+  reactorObject: {fileID: 2126981216}
+  motorObject: {fileID: 293822809}
+  displayObject: {fileID: 899160484}
 --- !u!114 &1171076656
 MonoBehaviour:
   m_ObjectHideFlags: 0
