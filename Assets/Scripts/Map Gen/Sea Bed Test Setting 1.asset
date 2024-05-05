@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 256
   height: 256
-  startRadius: 50
+  startRadius: 25
   startPow: 5
   depth: 40
   scale: 10
