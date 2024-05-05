@@ -27,6 +27,7 @@ public class BatteryScript : MonoBehaviour
         //Rotate dial
         batteryDial.transform.localEulerAngles = new Vector3(-90, 0, -dialRotation);
 
+
         if (batteryValueNormalized > 1)
         {
             submarineController.SetThrottleLock(true);
