@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003995701, g: 0.00021792616, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6566,7 +6566,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   hydrophone:
-    m_Name: 
+    m_Name: Hydrophone
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: cacad261-8ebf-4a45-b232-2e191be254f8
@@ -6582,7 +6582,7 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: dfd7173ff0f1f7948982dd66d5471d99, type: 2}
   leverInput: 
   heightLeverInput: 
-  inventoryImage: {fileID: 0}
+  inventoryImage: {fileID: 495157391}
 --- !u!1 &620313186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b8ee479d66f983740bddb87e840c0e2c, type: 3}
@@ -7308,8 +7308,8 @@ MonoBehaviour:
   hydrophoneManager: {fileID: 0}
   rotationAmount: 0
   engineSpeedInput: 0
-  hydrophoneDial: {fileID: 0}
-  inputHandlerScript: {fileID: 0}
+  hydrophoneDial: {fileID: 1126174992}
+  inputHandlerScript: {fileID: 561687742}
   hydrophone:
     m_Name: Hydrophone
     m_Type: 0
@@ -17688,6 +17688,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1126174992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 578f4588c76dbc14abfd1f0b198b9ba5, type: 3}
+  m_PrefabInstance: {fileID: 1601594498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1147232535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: 389cc7ea56c5a704690abdc01341a5ca, type: 3}
@@ -17907,7 +17912,7 @@ MonoBehaviour:
   displayHealth: 100
   fireValue: 0
   brokenValue: 0
-  submarineController: {fileID: 0}
+  submarineController: {fileID: 1171076653}
 --- !u!114 &1171076656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17941,6 +17946,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelObject: {fileID: 899160484}
+  submarineController: {fileID: 0}
+  controlPanel: {fileID: 0}
 --- !u!1 &1203159343
 GameObject:
   m_ObjectHideFlags: 0

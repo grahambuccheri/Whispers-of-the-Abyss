@@ -30,7 +30,7 @@ public class FireExtinguisher : MonoBehaviour, IInteractableTool
 
             if (Physics.Raycast(r, out RaycastHit hitInfo, data.interactDistance))
             {
-                Debug.Log(hitInfo.collider.gameObject.name);
+                // Debug.Log(hitInfo.collider.gameObject.name);
             }
         }
         else

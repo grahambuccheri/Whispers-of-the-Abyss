@@ -18,7 +18,7 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
 
     public void interact()
     {
-        Debug.Log("Button Pressed");
+        Debug.Log("Reactor Button Pressed");
         eventControllerScript.onBattery = !eventControllerScript.onBattery;
 
         inventory.Reset();
@@ -27,15 +27,36 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
     // Update is called once per frame
     void Update()
     {
+        // Here is how the battery script and values work:
+
+        // batteryValueNormalized is from 0 to 1, initially starts at 0, it drains the battery but in reverse (for simplicity reasons).
+
+        // batteryRate is the rate at which the battery is drained.
+
+        // batteryValue is the literal value from 0 to 100. However, we start at 100 first (this is opposite to batteryValueNormalized starting at 0 initially)
+
+        // dialRotation is the reason why batteryValueNormalized starts at 0. It is simpler to add degrees than figuring and calculating its degrees starting at 180.
         if (eventControllerScript.onBattery && batteryScript.batteryValueNormalized <= 1)
         {
 
             batteryScript.batteryValueNormalized += Time.deltaTime * batteryScript.batteryRate;
+
             batteryScript.batteryValueNormalized = Mathf.Clamp(batteryScript.batteryValueNormalized, 0, 1);
 
             batteryScript.batteryValue = 100f - (batteryScript.batteryValueNormalized * 100f);
 
-            batteryScript.dialRotation = batteryScript.batteryValueNormalized * 180f;
+            // Rotate counter clockwise
+            batteryScript.dialRotation = -batteryScript.batteryValueNormalized * 180f;
+        }
+        else if (!eventControllerScript.onBattery && batteryScript.batteryValueNormalized >= 0)
+        {
+            batteryScript.batteryValueNormalized -= Time.deltaTime * batteryScript.batteryRate;
+            batteryScript.batteryValueNormalized = Mathf.Clamp(batteryScript.batteryValueNormalized, 0, 1);
+
+            batteryScript.batteryValue = 100f - (batteryScript.batteryValueNormalized * 100f);
+
+            // Rotate clockwise
+            batteryScript.dialRotation = -batteryScript.batteryValueNormalized * 180f;
         }
 
 

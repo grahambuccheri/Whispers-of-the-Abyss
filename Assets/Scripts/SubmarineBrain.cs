@@ -17,15 +17,15 @@ using UnityEngine;
 public class SubmarineBrain : MonoBehaviour
 {
     [SerializeField] private GameObject panelObject;
-    private SubmarineController submarineController;
-    private ControlPanelScript controlPanel;
+    [SerializeField] private SubmarineController submarineController;
+    [SerializeField] private ControlPanelScript controlPanel;
     // TODO will likely want some event listeners here and established in start()
 
     // todo this is possibly some repeated effort with the submarine controller script. probably want to guard in just one or than the other rather than both. but it DOES make sense for the brain to know the lock state.
     private bool throttleLockState = false;
     private bool rudderLockState = false;
     private bool buoyancyLockState = false;
-    
+
     // Start is called before the first frame update
     void Start()
     {
