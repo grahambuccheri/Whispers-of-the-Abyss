@@ -13,6 +13,7 @@ public class DamageControl : MonoBehaviour
     public int fireValue;
     public int brokenValue;
     private Coroutine fireDamage;
+    [SerializeField] private SubmarineController submarineController;
     void Start()
     {
     batteryHealth = 100;
@@ -62,18 +63,20 @@ public class DamageControl : MonoBehaviour
     }
     
 
-    private void checkBroken(int target)
+    private bool checkBroken(int target)
     {
         //dsiable fire, enable smoke
         if(target <= 0)
         {
             //enable smoke
             //disable component
+            return true;
 
         }
         else
         {
             //re-enable 
+            return false;
         }
     }
     // Update is called once per frame
@@ -83,16 +86,46 @@ public class DamageControl : MonoBehaviour
     {
         //checks for battery
 
-        checkBroken(batteryHealth);
+        if (checkBroken(batteryHealth))
+        {
+            Debug.Log("DISABLE THROTTLE");
+            submarineController.SetThrottleLock(true);
+            
+        }
+        else
+        {
+            submarineController.SetThrottleLock(false);
+        }
         //checks for display
 
-        checkBroken(displayHealth);
+        if (checkBroken(displayHealth))
+        {
+
+        }
+        else
+        {
+
+        }
         //checks for reactor
 
-        checkBroken(reactorHealth);
+        if (checkBroken(reactorHealth))
+        {
+           
+        }
+        else
+        {
+                
+        }
         //checks for motor
 
-        checkBroken(motorHealth);
+        if (checkBroken(motorHealth))
+        {
+            submarineController.SetThrottleLock(true);
+        }
+        else
+        {
+            submarineController.SetThrottleLock(false);
+        }
 
         batteryHealth = Mathf.Clamp(batteryHealth, 0, 100);
         reactorHealth = Mathf.Clamp(reactorHealth, 0, 100);

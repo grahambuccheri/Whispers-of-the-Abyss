@@ -31,5 +31,9 @@ public class BatteryScript : MonoBehaviour
         {
             submarineController.SetThrottleLock(true);
         }
+        else
+        {
+            submarineController.SetThrottleLock(false);
+        }
     }
 }
