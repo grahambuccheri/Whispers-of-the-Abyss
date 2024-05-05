@@ -10,6 +10,7 @@ TagManager:
   - Submarine
   - Terrain
   - PlayerObject
+  - Hide
   layers:
   - Default
   - TransparentFX

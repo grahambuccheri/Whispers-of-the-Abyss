@@ -13,6 +13,8 @@ public class DamageControl : MonoBehaviour
     public int fireValue;
     public int brokenValue;
     private Coroutine fireDamage;
+    private GameObject[] objectsToHide;
+    ParticleSystem system;
     [SerializeField] private SubmarineController submarineController;
     void Start()
     {
@@ -24,7 +26,7 @@ public class DamageControl : MonoBehaviour
      //Values at which the components will be considered Broken or on fire.
     fireValue = 25;
     brokenValue = 0;
-
+    objectsToHide = GameObject.FindGameObjectsWithTag("Hide");
         // Start the damage coroutine
         fireDamage = StartCoroutine(FireCo());
 }
@@ -90,41 +92,125 @@ public class DamageControl : MonoBehaviour
         {
             Debug.Log("DISABLE THROTTLE");
             submarineController.SetThrottleLock(true);
+            system = GameObject.Find("BatterySparks").GetComponent<ParticleSystem>();
+            if (system.isStopped)
+            {
+                system.Play();
+            }
             
+        }
+       else
+        {
+            submarineController.SetThrottleLock(false);
+            system = GameObject.Find("BatterySparks").GetComponent<ParticleSystem>();
+            if (system.isPlaying)
+            {
+                system.Stop();
+            }
+            
+        }
+        if (checkFire(batteryHealth))
+        {
+            //turn on fire
+            system = GameObject.Find("BatterySmoke").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
         }
         else
         {
-            submarineController.SetThrottleLock(false);
+            system = GameObject.Find("BatterySmoke").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
         }
+
         //checks for display
 
         if (checkBroken(displayHealth))
         {
-
+            system = GameObject.Find("DisplaySparks").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
+            foreach (var obj in objectsToHide)
+            {
+                if (obj != null)
+                    obj.GetComponent<MeshRenderer>().enabled = false;
+            }
         }
         else
         {
+            system = GameObject.Find("DisplaySparks").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+            foreach (var obj in objectsToHide)
+            {
+                if (obj != null)
+                    obj.GetComponent<MeshRenderer>().enabled = true;
+            }
 
         }
+        if (checkFire(displayHealth))
+        {
+            system = GameObject.Find("DisplaySmoke").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
+        }
+        else
+        {
+            system = GameObject.Find("DisplaySmoke").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+        }
+
         //checks for reactor
 
         if (checkBroken(reactorHealth))
         {
-           
+            system = GameObject.Find("ReactorSparks").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
         }
         else
         {
-                
+            system = GameObject.Find("ReactorSparks").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+
         }
+        if (checkFire(reactorHealth))
+        {
+            //turn on fire
+            system = GameObject.Find("ReactorSmoke").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
+        }
+        else
+        {
+            //turn off fire
+            system = GameObject.Find("ReactorSmoke").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+        }
+
+
         //checks for motor
 
         if (checkBroken(motorHealth))
         {
             submarineController.SetThrottleLock(true);
+
+            system = GameObject.Find("MotorSparks").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
         }
         else
         {
             submarineController.SetThrottleLock(false);
+            system = GameObject.Find("MotorSparks").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+        }
+        if (checkFire(motorHealth))
+        {
+            system = GameObject.Find("MotorSmoke").GetComponent<ParticleSystem>();
+            if (system.isStopped) { system.Play(); }
+        }
+        else
+        {
+            system = GameObject.Find("MotorSmoke").GetComponent<ParticleSystem>();
+            if (system.isPlaying) { system.Stop(); }
+        }
+
+        if (shipHealth <= 0)
+        {
+
         }
 
         batteryHealth = Mathf.Clamp(batteryHealth, 0, 100);
