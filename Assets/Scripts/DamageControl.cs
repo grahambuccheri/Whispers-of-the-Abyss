@@ -133,6 +133,5 @@ public class DamageControl : MonoBehaviour
         displayHealth = Mathf.Clamp(displayHealth, 0, 100);
         shipHealth = Mathf.Clamp(shipHealth, 0, 100);
         
-
     }
 }

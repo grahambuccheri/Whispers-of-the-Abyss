@@ -27,10 +27,11 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
     // Update is called once per frame
     void Update()
     {
-        if (eventControllerScript.onBattery == true && batteryScript.batteryValueNormalized <= 1)
+        if (eventControllerScript.onBattery && batteryScript.batteryValueNormalized <= 1)
         {
 
             batteryScript.batteryValueNormalized += Time.deltaTime * batteryScript.batteryRate;
+            batteryScript.batteryValueNormalized = Mathf.Clamp(batteryScript.batteryValueNormalized, 0, 1);
 
             batteryScript.batteryValue = 100f - (batteryScript.batteryValueNormalized * 100f);
 
