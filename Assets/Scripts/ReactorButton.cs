@@ -27,9 +27,16 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
     // Update is called once per frame
     void Update()
     {
-        if (eventControllerScript.onBattery == true)
+        if (eventControllerScript.onBattery == true && batteryScript.batteryValueNormalized <= 1)
         {
-            batteryScript.batteryValue -= Time.deltaTime * batteryScript.batteryRate;
+
+            batteryScript.batteryValueNormalized += Time.deltaTime * batteryScript.batteryRate;
+
+            batteryScript.batteryValue = 100f - (batteryScript.batteryValueNormalized * 100f);
+
+            batteryScript.dialRotation = batteryScript.batteryValueNormalized * 180f;
         }
+
+
     }
 }
