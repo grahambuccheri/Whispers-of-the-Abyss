@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003995701, g: 0.00021792616, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -460,6 +460,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91b2b6045b8bb2d46a0241651206d0e4, type: 3}
+--- !u!1 &246841866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 578f4588c76dbc14abfd1f0b198b9ba5, type: 3}
+  m_PrefabInstance: {fileID: 1601594498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &258052763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6566,10 +6571,10 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   hydrophone:
-    m_Name: 
+    m_Name: Hydrophone
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: cacad261-8ebf-4a45-b232-2e191be254f8
+    m_Id: 4b6d3a9f-0f94-41fc-bf11-9bfac8600999
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -6582,7 +6587,7 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: dfd7173ff0f1f7948982dd66d5471d99, type: 2}
   leverInput: 
   heightLeverInput: 
-  inventoryImage: {fileID: 0}
+  inventoryImage: {fileID: 495157391}
 --- !u!1 &620313186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b8ee479d66f983740bddb87e840c0e2c, type: 3}
@@ -7308,13 +7313,13 @@ MonoBehaviour:
   hydrophoneManager: {fileID: 0}
   rotationAmount: 0
   engineSpeedInput: 0
-  hydrophoneDial: {fileID: 0}
-  inputHandlerScript: {fileID: 0}
+  hydrophoneDial: {fileID: 246841866}
+  inputHandlerScript: {fileID: 561687742}
   hydrophone:
     m_Name: Hydrophone
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 25dff02a-2e5a-4513-be75-87bf9780ac17
+    m_Id: 03e3f311-6864-497d-aafa-7b548c7ecde9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -17822,7 +17827,7 @@ Transform:
   m_GameObject: {fileID: 1171076645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: -2.15, y: 23.61, z: -10.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17907,7 +17912,7 @@ MonoBehaviour:
   displayHealth: 100
   fireValue: 0
   brokenValue: 0
-  submarineController: {fileID: 0}
+  submarineController: {fileID: 1171076653}
 --- !u!114 &1171076656
 MonoBehaviour:
   m_ObjectHideFlags: 0
