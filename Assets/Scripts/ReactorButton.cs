@@ -5,6 +5,7 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
     [SerializeField] Inventory inventory;
     [SerializeField] EventController eventControllerScript;
     [SerializeField] BatteryScript batteryScript;
+    bool isOn = false;
 
     public void disableAttributes()
     {
@@ -19,9 +20,21 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
     public void interact()
     {
         Debug.Log("Reactor Button Pressed");
-        eventControllerScript.onBattery = !eventControllerScript.onBattery;
-
+        Transform childTransform = transform.GetChild(0);
+        GameObject childObject = childTransform.gameObject;
         inventory.Reset();
+        if (isOn)
+        {
+            isOn = false;
+            childObject.transform.localPosition += new Vector3(0, 0.6f, 0);
+            eventControllerScript.onBattery = false;
+        }
+        else
+        {
+            isOn = true;
+            childObject.transform.localPosition += new Vector3(0, -0.6f, 0);
+            eventControllerScript.onBattery = true;
+        }
     }
 
     // Update is called once per frame
