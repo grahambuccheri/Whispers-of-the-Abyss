@@ -35,7 +35,7 @@ public class EventController : MonoBehaviour
             Debug.Log("Object was a monster");
             if (onBattery)
             {
-                if (Random.value > 0.5f)
+                if (Random.value > 0.75f)
                 {
                     randomDirection = attackDirections[Random.Range(0, attackDirections.Length)];
 

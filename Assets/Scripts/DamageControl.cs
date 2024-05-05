@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DamageControl : MonoBehaviour
 {
@@ -217,7 +218,8 @@ public class DamageControl : MonoBehaviour
 
         if (shipHealth <= 0)
         {
-
+            Debug.Log("You Died");
+            SceneManager.LoadScene("Playspace", LoadSceneMode.Single);
         }
 
         batteryHealth = Mathf.Clamp(batteryHealth, 0, 100);
