@@ -98,6 +98,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Hydrophone"",
+                    ""type"": ""Value"",
+                    ""id"": ""0ace1f8f-32c9-4c9d-aa9b-dfe0e4c1ca14"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""HeightLever"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""QE"",
+                    ""id"": ""4b611b90-f50c-42a9-b33a-6c7cdf98e23a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hydrophone"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0943892f-acca-4063-a95b-2b9f8db9ed1d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hydrophone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a4450b06-239f-4b34-a3d7-9c21123874bc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hydrophone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -314,6 +356,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Default_Lever = m_Default.FindAction("Lever", throwIfNotFound: true);
         m_Default_Click = m_Default.FindAction("Click", throwIfNotFound: true);
         m_Default_HeightLever = m_Default.FindAction("HeightLever", throwIfNotFound: true);
+        m_Default_Hydrophone = m_Default.FindAction("Hydrophone", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,6 +426,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Lever;
     private readonly InputAction m_Default_Click;
     private readonly InputAction m_Default_HeightLever;
+    private readonly InputAction m_Default_Hydrophone;
     public struct DefaultActions
     {
         private @PlayerControls m_Wrapper;
@@ -395,6 +439,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Lever => m_Wrapper.m_Default_Lever;
         public InputAction @Click => m_Wrapper.m_Default_Click;
         public InputAction @HeightLever => m_Wrapper.m_Default_HeightLever;
+        public InputAction @Hydrophone => m_Wrapper.m_Default_Hydrophone;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,6 +473,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HeightLever.started += instance.OnHeightLever;
             @HeightLever.performed += instance.OnHeightLever;
             @HeightLever.canceled += instance.OnHeightLever;
+            @Hydrophone.started += instance.OnHydrophone;
+            @Hydrophone.performed += instance.OnHydrophone;
+            @Hydrophone.canceled += instance.OnHydrophone;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -456,6 +504,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HeightLever.started -= instance.OnHeightLever;
             @HeightLever.performed -= instance.OnHeightLever;
             @HeightLever.canceled -= instance.OnHeightLever;
+            @Hydrophone.started -= instance.OnHydrophone;
+            @Hydrophone.performed -= instance.OnHydrophone;
+            @Hydrophone.canceled -= instance.OnHydrophone;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -483,5 +534,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLever(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnHeightLever(InputAction.CallbackContext context);
+        void OnHydrophone(InputAction.CallbackContext context);
     }
 }

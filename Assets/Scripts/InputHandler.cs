@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 
@@ -32,7 +31,7 @@ interface IInteractableTool
 [RequireComponent(typeof(CharacterController))]
 public class InputHandler : MonoBehaviour
 {
-
+    [Header("Player Default ActionMap Settings")]
     public PlayerControls playerControls;
     public CharacterController characterController;
 
@@ -43,11 +42,12 @@ public class InputHandler : MonoBehaviour
     private InputAction exitInteract;
     private InputAction click;
 
-
     public InputAction steer;
     public InputAction lever;
     public InputAction heightLever;
+    public InputAction hydrophone;
 
+    [Header("Player Settings")]
     [SerializeField] private float playerSpeed = 6f;
     [SerializeField] private float mouseSensitivity = 10f;
     [SerializeField] private float gravity = -9.8f;
@@ -55,12 +55,15 @@ public class InputHandler : MonoBehaviour
     public Camera mainCamera;
     private float cameraVerticalRotation = 0f;
 
+    [Header("Other Settings")]
     // Interaction and inventory variables
     [SerializeField] private float interactDistance = 2.5f;
     [SerializeField] private Inventory inventory;
 
     public List<int> leverInput = new List<int>();
     public List<int> heightLeverInput = new List<int>();
+
+    [SerializeField] GameObject inventoryImage;
 
     private void Awake()
     {
@@ -82,10 +85,11 @@ public class InputHandler : MonoBehaviour
         steer = playerControls.Default.Steer;
         lever = playerControls.Default.Lever;
         heightLever = playerControls.Default.HeightLever;
+        hydrophone = playerControls.Default.Hydrophone;
+
 
         // Holdable Object actions
         click = playerControls.Default.Click;
-
 
         interact.performed += OnInteract; // Subscribe to the OnIneract method 
         exitInteract.performed += OnExitInteract; // Subscribe to the ExitIneract method 
@@ -96,6 +100,7 @@ public class InputHandler : MonoBehaviour
         playerControls.FindAction("Lever").Disable();
         playerControls.FindAction("HeightLever").Disable();
         playerControls.FindAction("Steer").Disable();
+        playerControls.FindAction("Hydrophone").Disable();
     }
 
     private void OnDisable()
@@ -173,6 +178,8 @@ public class InputHandler : MonoBehaviour
                 inventory.toolFlag = true;
 
                 inventory.itemInteractingName = toolObj.data.toolName;
+
+                inventory.itemInteracting = toolObj.data.toolSprite;
             }
             // Raycast hits a ship/interactable object
             else if (hitInfo.collider.gameObject.tag == "InteractableObject" && hitInfo.collider.gameObject.TryGetComponent(out IInteractableShipObject interactObj))
@@ -259,6 +266,10 @@ public class InputHandler : MonoBehaviour
                 // Set the objects rotation
                 inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation + rotation.x, rotation.y, rotation.z);
 
+                // Display the sprite and make it fully visible
+                inventoryImage.GetComponent<Image>().sprite = inventory.itemInteracting;
+                inventoryImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+
 
                 float readClick = click.ReadValue<float>();
                 if (readClick == 1f)
@@ -270,6 +281,13 @@ public class InputHandler : MonoBehaviour
                     interactable.stopInteract();
                 }
             }
+
+            // Handles logic for when we aren't holding an object
+        }
+        else
+        {
+            // Make the image fully transparent
+            inventoryImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
         }
     }
 

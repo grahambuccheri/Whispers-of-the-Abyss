@@ -50,6 +50,7 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         inputHandlerScript.playerControls.FindAction("Steer").Enable();
         inputHandlerScript.playerControls.FindAction("Lever").Enable();
         inputHandlerScript.playerControls.FindAction("HeightLever").Enable();
+        inputHandlerScript.playerControls.FindAction("Hydrophone").Enable();
 
         // Handle player position in front of the control panel
         targetPlayerPosition = transform.position + offset;
@@ -72,8 +73,10 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
         inputHandlerScript.playerControls.FindAction("Steer").Disable();
         inputHandlerScript.playerControls.FindAction("Lever").Disable();
         inputHandlerScript.playerControls.FindAction("HeightLever").Disable();
+        inputHandlerScript.playerControls.FindAction("Hydrophone").Disable();
     }
 
+    // Note: any hydrophone actions are dealt in the hydrophone controller script.
     void Start()
     {
         steer = inputHandlerScript.steer;
