@@ -97,8 +97,27 @@ public class ControlPanelScript : MonoBehaviour, IInteractableShipObject
     private void Steer()
     {
         float wheelDirection = -steer.ReadValue<float>();
+        bool homing = false;
+        if (wheelDirection == 0)
+        {
+            homing = true;
+            if (wheelValue < 0)
+            {
+                wheelDirection = 1;
+            }
+            else if (wheelValue > 0)
+            {
+                wheelDirection = -1;
+            }
+
+        }
 
         wheelValue += wheelDirection * wheelRotationRate * Time.deltaTime;
+        if (homing && ((wheelDirection < 0 && wheelValue < 0) || (wheelDirection > 0 && wheelValue > 0)))
+        {
+            // prevent jittering from overshoot zero
+            wheelValue = 0;
+        }
 
         // Wheel values from -1 to 1, inputted in submarine controls
         wheelValue = Mathf.Clamp(wheelValue, -1f, 1f);

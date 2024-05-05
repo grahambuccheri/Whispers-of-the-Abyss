@@ -8,14 +8,14 @@ public class CollectableObject : MonoBehaviour
 
     public static event ScoreEvent OnCollection;
 
-    public float radius = 5f;
+    public Collider CollectionCollider;
+    
     public int score = 42;
     void Start()
     {
         // create sphere collider which is the collection radius
-        SphereCollider myCollider = gameObject.AddComponent<SphereCollider>();
-        myCollider.isTrigger = true;
-        myCollider.radius = radius;
+        CollectionCollider = GetComponent<Collider>();
+        CollectionCollider.isTrigger = true;
     }
 
     void OnTriggerEnter(Collider other)
