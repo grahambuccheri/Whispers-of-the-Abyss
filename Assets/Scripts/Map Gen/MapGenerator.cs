@@ -102,7 +102,7 @@ namespace Map_Gen
             // grab the gradient map:
             var gradients = NoiseGenerators.GradientMap(
                 terrain.terrainData.GetHeights(0, 0, settings.width, settings.height), settings.depth, settings.width,
-                settings.height, 1);
+                settings.height, 3);
             
             for (int x = 0; x < settings.width; x++)
             {
@@ -111,6 +111,8 @@ namespace Map_Gen
                     var point = new Vector2(x, y);
                     var distance = Vector2.Distance(point, circleCenter);
 
+                    //Debug.Log("Gradient at X:" + x + "  at Y:" + y + "  gradient: " + gradients[x, y]);
+                    
                     //var gradientAtPoint =
                     //    terrain.terrainData.GetSteepness((float)settings.width / x, (float)settings.height / y);
                     // select only points outside the spawn circle, inside the max range circle, and with satisfactory gradient.
