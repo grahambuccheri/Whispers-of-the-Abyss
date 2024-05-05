@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279d2417c04d54c078b4591eb9bdea76, type: 3}
+  m_Name: CollectableSub2Spawner
+  m_EditorClassIdentifier: 
+  spawnable: {fileID: 8937955261455086278, guid: 6cc5b80f51fdd4bb0a44777239884888, type: 3}
+  spawnOffset: {x: 0, y: 0, z: 0}
+  baseRotation: {x: 0, y: 0, z: 0}
+  xzVariance: 10
