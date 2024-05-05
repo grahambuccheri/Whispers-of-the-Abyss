@@ -87,6 +87,13 @@ MonoBehaviour:
   exclusionRadius: 20
   maximumTolerableGradient: 1
   objectSelection:
-  - {fileID: 11400000, guid: 08b04bb57bbf64b78a3fa13d022b3f3a, type: 2}
-  - {fileID: 11400000, guid: 178bbd1916d8f4912b652df9b1807dca, type: 2}
-  spawnLimits: c800000032000000
+  - {fileID: 11400000, guid: a4004cf0732f443eb932585e18ba36a4, type: 2}
+  - {fileID: 11400000, guid: c392f4cc45cc7411c81ea4618ff85dbf, type: 2}
+  - {fileID: 11400000, guid: 9e09c0d43de1342b0852de8aa6c982a3, type: 2}
+  - {fileID: 11400000, guid: 323e3df271caf427ca7ace82a359c152, type: 2}
+  - {fileID: 11400000, guid: 522006652ae994ef7924afaefaa959bf, type: 2}
+  - {fileID: 11400000, guid: 9aaf53162d97c4f4891d8855fa3e9ecf, type: 2}
+  - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
+  - {fileID: 11400000, guid: 9ae7bf504207e420a81229f8d344b34d, type: 2}
+  - {fileID: 11400000, guid: 9e688f4eb59604426999ad2e54cd3802, type: 2}
+  spawnLimits: 32000000320000003200000032000000320000003200000032000000320000003200000032000000
