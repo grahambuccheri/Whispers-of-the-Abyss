@@ -32325,7 +32325,7 @@ MonoBehaviour:
   engineSpeed: 0
   monsterSoundSource: {fileID: 1672273789}
   monsterSounds: []
-  monsterSound: {fileID: 8300000, guid: 1c4eaf4d334e49f47bd1ad542911bce4, type: 3}
+  monsterSound: {fileID: 8300000, guid: 85a518fdf2d43cc4a986ce45a1ccb611, type: 3}
   interferenceSoundSource: {fileID: 1323702893}
   interferenceSound: {fileID: 8300000, guid: d1c7dbc7236f0104d91ec8f78d72e9f9, type: 3}
 --- !u!65 &1171076649
@@ -33818,8 +33818,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1672273786}
   - component: {fileID: 1672273789}
-  - component: {fileID: 1672273788}
-  - component: {fileID: 1672273787}
   m_Layer: 0
   m_Name: MonsterAudio
   m_TagString: Untagged
@@ -33842,28 +33840,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 834140127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!170 &1672273787
-AudioDistortionFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672273785}
-  m_Enabled: 1
-  m_DistortionLevel: 0.5
---- !u!168 &1672273788
-AudioEchoFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672273785}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Delay: 750
-  m_DecayRatio: 0.8
-  m_WetMix: 0.57
-  m_DryMix: 1
 --- !u!82 &1672273789
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33874,15 +33850,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1c4eaf4d334e49f47bd1ad542911bce4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 85a518fdf2d43cc4a986ce45a1ccb611, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.5
+  m_Pitch: 0.9
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 98
   DopplerLevel: 1
   MinDistance: 1.0112942
   MaxDistance: 500
