@@ -37,7 +37,7 @@ public class DamageControl : MonoBehaviour
             if (checkFire(batteryHealth) || checkFire(displayHealth) || checkFire(reactorHealth) || checkFire(motorHealth))
             {
                 shipHealth -= 1;
-                Debug.Log("target new health" + shipHealth);
+                //Debug.Log("target new health" + shipHealth);
             }
             // Apply damage to the target
             
@@ -47,7 +47,7 @@ public class DamageControl : MonoBehaviour
     }
     private bool checkFire(int target)
     {
-        Debug.LogWarning("checking Health" + target);
+        //Debug.LogWarning("checking Health" + target);
         //enable fire and do 1 point of damage per second. 
         if (target != 0 && target <= fireValue)
         {

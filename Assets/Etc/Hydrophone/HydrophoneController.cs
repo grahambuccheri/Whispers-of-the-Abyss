@@ -20,6 +20,7 @@ public class HydrophoneController : MonoBehaviour
     void Update()
     {
         // Get input for rotating left and right
+        //Alex please edit this so it works for you
         float rotationInput = Input.GetAxis("Horizontal");
 
         // Calculate rotation amount based on input and rotation speed
