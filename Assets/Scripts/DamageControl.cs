@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DamageControl : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class DamageControl : MonoBehaviour
     public GameObject reactorObject;
     public GameObject motorObject;
     public GameObject displayObject;
+
+    [Header("UI Components")]
+    [SerializeField] private Image submarineHealth;
 
     void Start()
     {
@@ -228,5 +232,11 @@ public class DamageControl : MonoBehaviour
         displayHealth = Mathf.Clamp(displayHealth, 0, 100);
         shipHealth = Mathf.Clamp(shipHealth, 0, 100);
 
+        updateShipHealthDisplay();
+    }
+
+    public void updateShipHealthDisplay()
+    {
+        submarineHealth.fillAmount = shipHealth / 100f;
     }
 }
