@@ -117,15 +117,26 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
         // Continuously update movement and player's mouse for the camera movement
-        Movement();
-        Look();
+        // Movement();
+        // Look();
+        bool isPaused = PauseMenu.GameIsPaused;
+        if (!isPaused)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Movement();
+            Look();
+        
 
-        // Update the position in which we hold the object (if the player is holding one)
-        HoldObject();
+            // Update the position in which we hold the object (if the player is holding one)
+            HoldObject();
 
-        // Cursor, putting this in start makes the cursor disappear in locked state
-        Cursor.lockState = CursorLockMode.Locked; // Lock Cursor
-        Cursor.visible = true;
+            // Cursor, putting this in start makes the cursor disappear in locked state
+            // Cursor.lockState = CursorLockMode.Locked; // Lock Cursor
+            // Cursor.visible = true;
+        } else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     // HANDLING MOVEMENT METHOD

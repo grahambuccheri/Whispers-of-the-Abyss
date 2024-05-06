@@ -223,7 +223,8 @@ public class DamageControl : MonoBehaviour
         if (shipHealth <= 0)
         {
             Debug.Log("You Died");
-            SceneManager.LoadScene("Playspace", LoadSceneMode.Single);
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("DeathScene", LoadSceneMode.Single);
         }
 
         batteryHealth = Mathf.Clamp(batteryHealth, 0, 100);

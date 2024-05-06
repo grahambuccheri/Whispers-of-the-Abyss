@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7eca5fc48a44180935c00595e92b9a, type: 3}
   m_Name: Run Statistics
   m_EditorClassIdentifier: 
-  score: 0
+  score: 42
   credits: 0
+  currentDay: 0
