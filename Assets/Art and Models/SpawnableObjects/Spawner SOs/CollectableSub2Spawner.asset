@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d2417c04d54c078b4591eb9bdea76, type: 3}
   m_Name: CollectableSub2Spawner
   m_EditorClassIdentifier: 
-  spawnable: {fileID: 8937955261455086278, guid: 6cc5b80f51fdd4bb0a44777239884888, type: 3}
+  spawnable: {fileID: 1767575039943736778, guid: 7808befa5d7109c4d8949e7b2f460748, type: 3}
   spawnOffset: {x: 0, y: 0, z: 0}
   baseRotation: {x: 0, y: 0, z: 0}
   xzVariance: 10

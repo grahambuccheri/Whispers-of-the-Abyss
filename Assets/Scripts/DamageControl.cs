@@ -1,35 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DamageControl : MonoBehaviour
 {
 
-    public int shipHealth;
-    public int batteryHealth;
-    public int reactorHealth;
-    public int motorHealth;
-    public int displayHealth;
-    public int fireValue;
-    public int brokenValue;
+    public float shipHealth;
+    public float batteryHealth;
+    public float reactorHealth;
+    public float motorHealth;
+    public float displayHealth;
+    public float fireValue;
+    public float brokenValue;
     private Coroutine fireDamage;
     private GameObject[] objectsToHide;
     ParticleSystem system;
     [SerializeField] private SubmarineController submarineController;
+
+    [Header("Component Objects")]
+    public GameObject batteryObject;
+    public GameObject reactorObject;
+    public GameObject motorObject;
+    public GameObject displayObject;
+
     void Start()
     {
-    batteryHealth = 100;
-    reactorHealth = 100;
-    motorHealth = 100;
-    displayHealth = 100;
-    shipHealth = 100;
-     //Values at which the components will be considered Broken or on fire.
-    fireValue = 25;
-    brokenValue = 0;
-    objectsToHide = GameObject.FindGameObjectsWithTag("Hide");
+        batteryHealth = 100;
+        reactorHealth = 100;
+        motorHealth = 100;
+        displayHealth = 100;
+        shipHealth = 100;
+        //Values at which the components will be considered Broken or on fire.
+        fireValue = 25;
+        brokenValue = 0;
+        objectsToHide = GameObject.FindGameObjectsWithTag("Hide");
         // Start the damage coroutine
         fireDamage = StartCoroutine(FireCo());
-}
+    }
 
 
     //Fire Damage
@@ -43,18 +51,18 @@ public class DamageControl : MonoBehaviour
                 //Debug.Log("target new health" + shipHealth);
             }
             // Apply damage to the target
-            
+
             // Wait for the specified tick rate
             yield return new WaitForSeconds(1);
         }
     }
-    private bool checkFire(int target)
+    private bool checkFire(float target)
     {
         //Debug.LogWarning("checking Health" + target);
         //enable fire and do 1 point of damage per second. 
         if (target != 0 && target <= fireValue)
         {
-           //Start fire animation
+            //Start fire animation
             return true;
         }
         else
@@ -63,12 +71,12 @@ public class DamageControl : MonoBehaviour
             return false;
         }
     }
-    
 
-    private bool checkBroken(int target)
+
+    private bool checkBroken(float target)
     {
         //dsiable fire, enable smoke
-        if(target <= 0)
+        if (target <= 0)
         {
             //enable smoke
             //disable component
@@ -97,9 +105,9 @@ public class DamageControl : MonoBehaviour
             {
                 system.Play();
             }
-            
+
         }
-       else
+        else
         {
             submarineController.SetThrottleLock(false);
             system = GameObject.Find("BatterySparks").GetComponent<ParticleSystem>();
@@ -107,7 +115,7 @@ public class DamageControl : MonoBehaviour
             {
                 system.Stop();
             }
-            
+
         }
         if (checkFire(batteryHealth))
         {
@@ -210,7 +218,8 @@ public class DamageControl : MonoBehaviour
 
         if (shipHealth <= 0)
         {
-
+            Debug.Log("You Died");
+            SceneManager.LoadScene("Playspace", LoadSceneMode.Single);
         }
 
         batteryHealth = Mathf.Clamp(batteryHealth, 0, 100);
@@ -218,6 +227,6 @@ public class DamageControl : MonoBehaviour
         motorHealth = Mathf.Clamp(motorHealth, 0, 100);
         displayHealth = Mathf.Clamp(displayHealth, 0, 100);
         shipHealth = Mathf.Clamp(shipHealth, 0, 100);
-        
+
     }
 }

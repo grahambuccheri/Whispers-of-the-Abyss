@@ -28,12 +28,16 @@ public class ReactorButton : MonoBehaviour, IInteractableShipObject
             isOn = false;
             childObject.transform.localPosition += new Vector3(0, 0.6f, 0);
             eventControllerScript.onBattery = false;
+            transform.GetChild(2).gameObject.GetComponent<Light>().color = new Color32(236, 208, 160, 255);
+            transform.GetChild(3).gameObject.GetComponent<Light>().color = new Color32(236, 208, 160, 255);
         }
         else
         {
             isOn = true;
             childObject.transform.localPosition += new Vector3(0, -0.6f, 0);
             eventControllerScript.onBattery = true;
+            transform.GetChild(2).gameObject.GetComponent<Light>().color = new Color32(213, 104, 61, 255);
+            transform.GetChild(3).gameObject.GetComponent<Light>().color = new Color32(213, 104, 61, 255);
         }
     }
 

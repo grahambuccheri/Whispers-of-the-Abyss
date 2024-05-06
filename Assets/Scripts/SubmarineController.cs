@@ -27,6 +27,12 @@ public class SubmarineController : MonoBehaviour
     [SerializeField] private float maxRotationRate = 30f; // degrees per second.
     [SerializeField] private float maxRotationAcceleration = 15f;
 
+    [Header("Depth dial parameters")]
+    [SerializeField] private GameObject depthDial;
+    [SerializeField] private float maxHeight;
+    [SerializeField] private float heightNormalizedRotation;
+    [SerializeField] private bool maxHeightReached;
+
     [Header("Engine Parameters")] // TODO change me to follow the paradigm of all others! have engine rpm go from 0 to 1. have secondary scripts map this and others like it to actual values.
     [SerializeField] private float motorRpm = 0f; // careful setting this directly. Note this is a proportion of max RPM, so if you read this for a secondary script, map it to your desired RPM range.
     [SerializeField] private float maxMotorAcceleration = 0.25f; // engine revs a quarter of max speed per section by default.
@@ -71,6 +77,7 @@ public class SubmarineController : MonoBehaviour
     {
         UpdateState(); // throttle up the engines
         ProcessMovement(); // determine change in motion based on state
+        updateDepthDial(); // update the position of the depth dial
     }
 
     // interface. Use these from other scripts when interacting with this script.
@@ -331,6 +338,22 @@ public class SubmarineController : MonoBehaviour
         var dragAccel = -1 * direction * rotationalDragCoefficient * (rotationSpeed * rotationSpeed);
         var netAccel = rudderAccel + dragAccel;
         return netAccel;
+    }
+
+    void updateDepthDial()
+    {
+        heightNormalizedRotation = (transform.position.y / maxHeight) * 180f;
+        heightNormalizedRotation = Mathf.Clamp(heightNormalizedRotation, 0, 180); // Clamp dial rotation
+        depthDial.transform.localEulerAngles = new Vector3(-90, 0, -180 + heightNormalizedRotation);
+
+        if (transform.position.y > maxHeight)
+        {
+            maxHeightReached = true;
+        }
+        else
+        {
+            maxHeightReached = false;
+        }
     }
 
     // private float Normalize(float val, float min, float max)
