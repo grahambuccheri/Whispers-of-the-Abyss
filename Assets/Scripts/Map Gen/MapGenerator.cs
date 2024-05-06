@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
 using Random = System.Random;
 
@@ -33,6 +35,11 @@ namespace Map_Gen
         private int numRequiredSpawns;
         
         private Random rng;
+
+        private GameObject approachWarningColliderHolder;
+        private GameObject levelExitColliderHolder;
+        private CapsuleCollider approachWarningCollider;
+        private CapsuleCollider levelExitCollider;
 
         void Start()
         {
@@ -69,6 +76,21 @@ namespace Map_Gen
             GenerateSpawnLocations(); 
             //IllustrateSpawnLocationsDebug();
             PopulateSpawnLocations();
+            
+            // we need to set the boundary triggers. We will have two. One for the warning, and one for the level leave.
+            // create holders
+            approachWarningColliderHolder = new GameObject("approach warning boundary");
+            levelExitColliderHolder = new GameObject("level boundary");
+            // set appropriate tags
+            approachWarningColliderHolder.tag = "LevelExitWarn";
+            levelExitColliderHolder.tag = "LevelExit";
+            // add colliders, and set radius dynamically
+            approachWarningCollider = approachWarningColliderHolder.AddComponent<CapsuleCollider>();
+            approachWarningCollider.radius = settings.width / 2f - 30;
+            levelExitCollider = levelExitColliderHolder.AddComponent<CapsuleCollider>();
+            levelExitCollider.radius = settings.width / 2f - 15;
+            // TODO set heights to be larger! (want it like a cylinder)
+            // TODO TODO add handling for hitting these onto the remote sub. this just creates them.
         }
 
         // Update is called once per frame
