@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71edd22160052401eabfae3c10930858, type: 3}
-  m_Name: FullGenerationTest1
+  m_Name: Full Generation Preset 1
   m_EditorClassIdentifier: 
-  width: 512
-  height: 512
-  startRadius: 25
-  startPow: 5
-  depth: 50
-  scale: 15.08
+  width: 300
+  height: 300
+  startRadius: 20
+  startPow: 3
+  depth: 40
+  scale: 10
   octaves: 4
-  persistence: 0.67
-  lacunarity: 1.43
+  persistence: 0.5
+  lacunarity: 1.5
   offset: {x: 0, y: 0}
   seed: 42
   depthCurve:
@@ -45,8 +45,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.85669464
     - serializedVersion: 3
-      time: 0.6043967
-      value: 0.23843862
+      time: 0.59189975
+      value: 0.25494862
       inSlope: 1.479444
       outSlope: 1.479444
       tangentMode: 0
@@ -54,8 +54,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.4561644
     - serializedVersion: 3
-      time: 0.7641432
-      value: 0.51236135
+      time: 0.743315
+      value: 0.50999624
       inSlope: 2.1117294
       outSlope: 2.1117294
       tangentMode: 0
@@ -83,17 +83,17 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maximumSpawnRadius: 200
-  exclusionRadius: 20
+  maximumSpawnRadius: 140
+  exclusionRadius: 15
   maximumTolerableGradient: 1
   objectSelection:
+  - {fileID: 11400000, guid: 9aaf53162d97c4f4891d8855fa3e9ecf, type: 2}
   - {fileID: 11400000, guid: 9ae7bf504207e420a81229f8d344b34d, type: 2}
   - {fileID: 11400000, guid: 9e688f4eb59604426999ad2e54cd3802, type: 2}
-  - {fileID: 11400000, guid: 9aaf53162d97c4f4891d8855fa3e9ecf, type: 2}
   - {fileID: 11400000, guid: a4004cf0732f443eb932585e18ba36a4, type: 2}
   - {fileID: 11400000, guid: c392f4cc45cc7411c81ea4618ff85dbf, type: 2}
   - {fileID: 11400000, guid: 9e09c0d43de1342b0852de8aa6c982a3, type: 2}
   - {fileID: 11400000, guid: 323e3df271caf427ca7ace82a359c152, type: 2}
-  - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
   - {fileID: 11400000, guid: 522006652ae994ef7924afaefaa959bf, type: 2}
-  spawnLimits: 140000001e000000140000001e00000019000000280000000a0000000f0000000f000000
+  - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
+  spawnLimits: 640000000f0000000f0000001e0000001e0000001e0000001e0000001e0000001e000000

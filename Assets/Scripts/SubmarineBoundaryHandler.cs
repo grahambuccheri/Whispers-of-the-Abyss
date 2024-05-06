@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,5 +15,18 @@ public class SubmarineBoundaryHandler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("LevelExit"))
+        {
+            // TODO leave level stuff here
+        }
+
+        if (other.CompareTag("LevelExitWarn"))
+        {
+            // TODO warn close to boundary!
+        }
     }
 }
