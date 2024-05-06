@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71edd22160052401eabfae3c10930858, type: 3}
+  m_Name: COPY
+  m_EditorClassIdentifier: 
+  width: 300
+  height: 300
+  startRadius: 20
+  startPow: 3
+  depth: 40
+  scale: 10
+  octaves: 4
+  persistence: 0.5
+  lacunarity: 1.5
+  offset: {x: 0, y: 0}
+  seed: 42
+  depthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.41167212
+      value: 0.08697496
+      inSlope: 0.53357416
+      outSlope: 0.53357416
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.85669464
+    - serializedVersion: 3
+      time: 0.59189975
+      value: 0.25494862
+      inSlope: 1.479444
+      outSlope: 1.479444
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.4561644
+    - serializedVersion: 3
+      time: 0.743315
+      value: 0.50999624
+      inSlope: 2.1117294
+      outSlope: 2.1117294
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.55075145
+    - serializedVersion: 3
+      time: 0.8670755
+      value: 0.8905351
+      inSlope: 1.8341267
+      outSlope: 1.8341267
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.21328966
+      outSlope: 0.21328966
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maximumSpawnRadius: 140
+  exclusionRadius: 15
+  maximumTolerableGradient: 1
+  objectSelection:
+  - {fileID: 11400000, guid: 9aaf53162d97c4f4891d8855fa3e9ecf, type: 2}
+  - {fileID: 11400000, guid: 9ae7bf504207e420a81229f8d344b34d, type: 2}
+  - {fileID: 11400000, guid: 9e688f4eb59604426999ad2e54cd3802, type: 2}
+  - {fileID: 11400000, guid: a4004cf0732f443eb932585e18ba36a4, type: 2}
+  - {fileID: 11400000, guid: c392f4cc45cc7411c81ea4618ff85dbf, type: 2}
+  - {fileID: 11400000, guid: 9e09c0d43de1342b0852de8aa6c982a3, type: 2}
+  - {fileID: 11400000, guid: 323e3df271caf427ca7ace82a359c152, type: 2}
+  - {fileID: 11400000, guid: 522006652ae994ef7924afaefaa959bf, type: 2}
+  - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
+  spawnLimits: 640000000f0000000f0000001e0000001e0000001e0000001e0000001e0000001e000000
