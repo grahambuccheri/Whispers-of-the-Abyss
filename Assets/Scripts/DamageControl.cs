@@ -32,35 +32,35 @@ public class DamageControl : MonoBehaviour
         displayHealth = 100;
         shipHealth = 100;
         //Values at which the components will be considered Broken or on fire.
-        fireValue = 25;
-        brokenValue = 0;
+        fireValue = 50;
+        brokenValue = 40;
         objectsToHide = GameObject.FindGameObjectsWithTag("Hide");
         // Start the damage coroutine
         fireDamage = StartCoroutine(FireCo());
     }
 
 
-    //Fire Damage
+    //Fire Damage. Procedurally remove hitpoints from the submarines main health while any component is on fire.
     private IEnumerator FireCo()
     {
         while (true)
         {
             if (checkFire(batteryHealth) || checkFire(displayHealth) || checkFire(reactorHealth) || checkFire(motorHealth))
             {
-                shipHealth -= 1;
+                shipHealth -= 4;
                 //Debug.Log("target new health" + shipHealth);
             }
             // Apply damage to the target
 
             // Wait for the specified tick rate
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
     }
     private bool checkFire(float target)
     {
         //Debug.LogWarning("checking Health" + target);
         //enable fire and do 1 point of damage per second. 
-        if (target != 0 && target <= fireValue)
+        if (target <= fireValue)
         {
             //Start fire animation
             return true;
@@ -76,7 +76,7 @@ public class DamageControl : MonoBehaviour
     private bool checkBroken(float target)
     {
         //dsiable fire, enable smoke
-        if (target <= 0)
+        if (target <= brokenValue)
         {
             //enable smoke
             //disable component
