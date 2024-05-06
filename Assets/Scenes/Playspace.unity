@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.003995701, g: 0.00021792616, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMarker: {fileID: 0}
-  settings: {fileID: 11400000, guid: 3f8c5345ebf714d828d1683eac012fd4, type: 2}
+  settings: {fileID: 11400000, guid: 3fafea0de20084f16b8d4faf3fad1bd0, type: 2}
 --- !u!154 &269168581
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -23300,6 +23300,72 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dd5e7066d47fe6b4cbd02646dc943131, type: 3}
   m_PrefabInstance: {fileID: 1211571314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &899767690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899767693}
+  - component: {fileID: 899767692}
+  - component: {fileID: 899767691}
+  m_Layer: 0
+  m_Name: BlackBoxKillTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &899767691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899767690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fabe567de3e4a3988b0bb6e6b55f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &899767692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899767690}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 500, y: 20, z: 500}
+  m_Center: {x: 0, y: -50, z: 0}
+--- !u!4 &899767693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899767690}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &926963890
 GameObject:
   m_ObjectHideFlags: 0
@@ -42051,3 +42117,4 @@ SceneRoots:
   - {fileID: 1754772733}
   - {fileID: 1853607947054090736}
   - {fileID: 338838584}
+  - {fileID: 899767693}

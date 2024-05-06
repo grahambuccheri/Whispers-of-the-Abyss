@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71edd22160052401eabfae3c10930858, type: 3}
   m_Name: COPY
   m_EditorClassIdentifier: 
-  width: 512
-  height: 512
+  width: 256
+  height: 256
   startRadius: 25
   startPow: 3
   depth: 40
@@ -22,7 +22,7 @@ MonoBehaviour:
   persistence: 0.44
   lacunarity: 1.48
   offset: {x: 0, y: 0}
-  seed: 42
+  seed: 0
   depthCurve:
     serializedVersion: 2
     m_Curve:
@@ -83,9 +83,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maximumSpawnRadius: 230
+  maximumSpawnRadius: 110
   exclusionRadius: 15
-  maximumTolerableGradient: 1
+  maximumTolerableGradient: 5
   objectSelection:
   - {fileID: 11400000, guid: 9aaf53162d97c4f4891d8855fa3e9ecf, type: 2}
   - {fileID: 11400000, guid: 9ae7bf504207e420a81229f8d344b34d, type: 2}
@@ -96,4 +96,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 323e3df271caf427ca7ace82a359c152, type: 2}
   - {fileID: 11400000, guid: 522006652ae994ef7924afaefaa959bf, type: 2}
   - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
-  spawnLimits: 640000000f0000000f0000001e0000001e0000001e0000001e0000001e0000001e000000
+  spawnLimits: 640000000f0000000f0000000f0000000f0000000f0000000f0000000f0000000f000000

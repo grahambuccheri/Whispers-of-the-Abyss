@@ -12,6 +12,8 @@ TagManager:
   - PlayerObject
   - Hide
   - blackbox
+  - LevelExit
+  - LevelExitWarn
   layers:
   - Default
   - TransparentFX
