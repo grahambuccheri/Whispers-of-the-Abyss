@@ -111,7 +111,7 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -264,7 +264,7 @@ public class InputHandler : MonoBehaviour
                 inventory.item.transform.localPosition += offset;
 
                 // Set the objects rotation
-                inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation + rotation.x, rotation.y, rotation.z);
+                inventory.item.transform.localRotation = Quaternion.Euler(cameraVerticalRotation + rotation.x, 0, rotation.z);
 
                 // Display the sprite and make it fully visible
                 inventoryImage.GetComponent<Image>().sprite = inventory.itemInteracting;
