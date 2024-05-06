@@ -29,4 +29,9 @@ public class SubmarineBoundaryHandler : MonoBehaviour
             // TODO warn close to boundary!
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // TODO
+    }
 }
