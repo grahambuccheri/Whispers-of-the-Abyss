@@ -111,7 +111,7 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()

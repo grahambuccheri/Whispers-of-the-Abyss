@@ -86,11 +86,17 @@ namespace Map_Gen
             levelExitColliderHolder.tag = "LevelExit";
             // add colliders, and set radius dynamically
             approachWarningCollider = approachWarningColliderHolder.AddComponent<CapsuleCollider>();
-            approachWarningCollider.radius = settings.width / 2f - 30;
             levelExitCollider = levelExitColliderHolder.AddComponent<CapsuleCollider>();
+
+            approachWarningCollider.isTrigger = true;
+            levelExitCollider.isTrigger = true;
+            
+            approachWarningCollider.radius = settings.width / 2f - 30;
             levelExitCollider.radius = settings.width / 2f - 15;
-            // TODO set heights to be larger! (want it like a cylinder)
-            // TODO TODO add handling for hitting these onto the remote sub. this just creates them.
+
+            approachWarningCollider.height = 400;
+            levelExitCollider.height = 400;
+            
         }
 
         // Update is called once per frame

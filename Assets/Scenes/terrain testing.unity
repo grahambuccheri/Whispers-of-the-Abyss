@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMarker: {fileID: 0}
-  settings: {fileID: 11400000, guid: 4ab272965f88f4a1dbbc8f766400fe95, type: 2}
+  settings: {fileID: 11400000, guid: 3fafea0de20084f16b8d4faf3fad1bd0, type: 2}
 --- !u!154 &1543832612
 TerrainCollider:
   m_ObjectHideFlags: 0

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71edd22160052401eabfae3c10930858, type: 3}
   m_Name: COPY
   m_EditorClassIdentifier: 
-  width: 300
-  height: 300
-  startRadius: 20
+  width: 512
+  height: 512
+  startRadius: 25
   startPow: 3
   depth: 40
-  scale: 10
+  scale: 16.04
   octaves: 4
-  persistence: 0.5
-  lacunarity: 1.5
+  persistence: 0.44
+  lacunarity: 1.48
   offset: {x: 0, y: 0}
   seed: 42
   depthCurve:
@@ -83,7 +83,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maximumSpawnRadius: 140
+  maximumSpawnRadius: 230
   exclusionRadius: 15
   maximumTolerableGradient: 1
   objectSelection:
