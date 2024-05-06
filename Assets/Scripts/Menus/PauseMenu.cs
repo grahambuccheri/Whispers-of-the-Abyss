@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject controls;
 
-    public static bool GameIsPaused = false;
+    [FormerlySerializedAs("GameIsPaused")] public bool gameIsPaused = false;
 
     void Start (){
         pauseMenu = GameObject.Find("PauseMenu");
@@ -25,7 +26,7 @@ public class PauseMenu : MonoBehaviour
         controlsMenu.GetComponent<Canvas>().enabled = false;
 
         Cursor.visible = false;
-        GameIsPaused = false;
+        gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -34,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (gameIsPaused)
             {
                 Resume();
             } else {
@@ -46,7 +47,8 @@ public class PauseMenu : MonoBehaviour
     void Resume(){
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
+        gameIsPaused = false;
+        controlsMenu.GetComponent<Canvas>().enabled = false;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.GetComponent<Canvas>().enabled = true;
 
         Time.timeScale = 0f;
-        GameIsPaused = true;
+        gameIsPaused = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -67,7 +69,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         // Time.timeScale = 0f;
-        GameIsPaused = true;
+        gameIsPaused = true;
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -65,6 +65,7 @@ public class InputHandler : MonoBehaviour
 
     [SerializeField] GameObject inventoryImage;
 
+    public PauseMenu pauseMenu;
     private bool isPaused;
 
     private void Awake()
@@ -122,11 +123,10 @@ public class InputHandler : MonoBehaviour
         // Continuously update movement and player's mouse for the camera movement
         // Movement();
         // Look();
-        Cursor.visible = true;
-        
-        if (!isPaused)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = true;
+        // if (!isPaused)
+        // {
+        //     Cursor.lockState = CursorLockMode.Locked;
             Movement();
             Look();
         
@@ -136,11 +136,11 @@ public class InputHandler : MonoBehaviour
 
             // Cursor, putting this in start makes the cursor disappear in locked state
             // Cursor.lockState = CursorLockMode.Locked; // Lock Cursor
-            // Cursor.visible = true;
-        } else
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+            Cursor.visible = true;
+        // } else
+        // {
+        //     Cursor.lockState = CursorLockMode.None;
+        // }
     }
 
     // HANDLING MOVEMENT METHOD
