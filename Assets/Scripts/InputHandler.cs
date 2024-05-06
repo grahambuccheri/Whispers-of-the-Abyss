@@ -65,6 +65,8 @@ public class InputHandler : MonoBehaviour
 
     [SerializeField] GameObject inventoryImage;
 
+    private bool isPaused;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -111,7 +113,8 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
-
+        //isPaused = PauseMenu.GameIsPaused;
+        isPaused = false;
     }
 
     void Update()
@@ -119,7 +122,8 @@ public class InputHandler : MonoBehaviour
         // Continuously update movement and player's mouse for the camera movement
         // Movement();
         // Look();
-        bool isPaused = PauseMenu.GameIsPaused;
+        Cursor.visible = true;
+        
         if (!isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;

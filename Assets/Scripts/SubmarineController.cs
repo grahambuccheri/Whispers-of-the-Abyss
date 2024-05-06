@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SubmarineController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class SubmarineController : MonoBehaviour
 
     [Header("Depth dial parameters")]
     [SerializeField] private GameObject depthDial;
-    [SerializeField] private float maxHeight;
+    [SerializeField] private float maxHeight = 100;
     [SerializeField] private float heightNormalizedRotation;
     [SerializeField] private bool maxHeightReached;
 
@@ -349,6 +350,8 @@ public class SubmarineController : MonoBehaviour
         if (transform.position.y > maxHeight)
         {
             maxHeightReached = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("DeathScene", LoadSceneMode.Single);
         }
         else
         {

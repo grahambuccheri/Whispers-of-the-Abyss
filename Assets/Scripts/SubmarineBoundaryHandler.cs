@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SubmarineBoundaryHandler : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class SubmarineBoundaryHandler : MonoBehaviour
     {
         if (other.CompareTag("LevelExit"))
         {
-            // TODO leave level stuff here
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("DeathScene", LoadSceneMode.Single);
         }
 
         if (other.CompareTag("LevelExitWarn"))
