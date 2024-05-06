@@ -10,16 +10,17 @@ public class RunStats : ScriptableObject
 
     public int credits;
     
+    // Call this on start game!
     public void Reset()
     {
         score = 0;
         credits = 0;
     }
 
-    public void PickupItem(int itemScore, int value)
+    public void PickupItem(int itemScore, int worth)
     {
         score += itemScore;
-        credits += value;
+        credits += worth;
     }
 
     // attempts to purchase item with price. returns false if should fail (would put user in debt)

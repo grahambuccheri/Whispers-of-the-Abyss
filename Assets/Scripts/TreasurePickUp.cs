@@ -5,7 +5,11 @@ using UnityEngine.Serialization;
 
 public class TreasurePickUp : MonoBehaviour
 {
+    public RunStats runStats;
+        
     public GameObject treasure;
+    public int treasureWorth = 50;
+    public int treasureScoreValue = 100;
 
     public float pickUpSpeed;
     public float pickUpDistance;
@@ -26,7 +30,8 @@ public class TreasurePickUp : MonoBehaviour
             {
                 numTreasure += 1;
                 Destroy(treasure);
-
+                runStats.PickupItem(treasureScoreValue, treasureWorth);
+                
                 Instantiate(holdableBlackBox, spawnLocation.transform.position, Quaternion.Euler(new Vector3(-90, 0f, 0f)));
 
                 treasure = null;
