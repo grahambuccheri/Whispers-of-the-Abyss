@@ -154,8 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15b7d17bf3c3415683f389b3c0f8373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 1
+  animateTerrain: 0
   debugMarker: {fileID: 0}
-  settings: {fileID: 11400000, guid: 3fafea0de20084f16b8d4faf3fad1bd0, type: 2}
+  settings: {fileID: 11400000, guid: 06a95760366594d5fbcb1e1e2246cd9d, type: 2}
 --- !u!154 &1543832612
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -202,7 +204,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: f9707ecf4f09b7942ae2cdf7d51b003e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1

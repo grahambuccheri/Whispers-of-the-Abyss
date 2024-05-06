@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0039957035, g: 0.00021792635, b: 0.000000051515347, a: 1}
+  m_IndirectSpecularColor: {r: 0.003995701, g: 0.00021792616, b: 0.000000051515347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -895,8 +895,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15b7d17bf3c3415683f389b3c0f8373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
+  animateTerrain: 0
   debugMarker: {fileID: 0}
-  settings: {fileID: 11400000, guid: 3fafea0de20084f16b8d4faf3fad1bd0, type: 2}
+  settings: {fileID: 11400000, guid: 06a95760366594d5fbcb1e1e2246cd9d, type: 2}
 --- !u!154 &269168581
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -23352,7 +23354,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 500, y: 20, z: 500}
+  m_Size: {x: 700, y: 20, z: 700}
   m_Center: {x: 0, y: -50, z: 0}
 --- !u!4 &899767693
 Transform:

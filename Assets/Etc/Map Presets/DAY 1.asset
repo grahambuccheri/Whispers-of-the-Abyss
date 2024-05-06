@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71edd22160052401eabfae3c10930858, type: 3}
-  m_Name: COPY
+  m_Name: DAY 1
   m_EditorClassIdentifier: 
-  width: 256
-  height: 256
+  width: 512
+  height: 512
   startRadius: 25
-  startPow: 3
-  depth: 40
-  scale: 16.04
-  octaves: 4
-  persistence: 0.44
-  lacunarity: 1.48
-  offset: {x: 0, y: 0}
+  startPow: 8
+  depth: 8
+  scale: 16.6
+  octaves: 5
+  persistence: 0.61
+  lacunarity: -0.86
+  offset: {x: 15.591029, y: 15.591029}
   seed: 0
   depthCurve:
     serializedVersion: 2
@@ -36,54 +36,18 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.41167212
-      value: 0.08697496
-      inSlope: 0.53357416
-      outSlope: 0.53357416
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.85669464
-    - serializedVersion: 3
-      time: 0.59189975
-      value: 0.25494862
-      inSlope: 1.479444
-      outSlope: 1.479444
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.4561644
-    - serializedVersion: 3
-      time: 0.743315
-      value: 0.50999624
-      inSlope: 2.1117294
-      outSlope: 2.1117294
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.55075145
-    - serializedVersion: 3
-      time: 0.8670755
-      value: 0.8905351
-      inSlope: 1.8341267
-      outSlope: 1.8341267
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.21328966
-      outSlope: 0.21328966
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 1
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maximumSpawnRadius: 110
+  maximumSpawnRadius: 220
   exclusionRadius: 15
   maximumTolerableGradient: 5
   objectSelection:
@@ -97,4 +61,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 323e3df271caf427ca7ace82a359c152, type: 2}
   - {fileID: 11400000, guid: 522006652ae994ef7924afaefaa959bf, type: 2}
   - {fileID: 11400000, guid: 8c6926e60fab546e9a92f080947f99e6, type: 2}
-  spawnLimits: 64000000320000000500000003000000050000000a00000007000000050000000500000005000000
+  spawnLimits: 140000003200000006000000040000000a0000001400000007000000100000000500000005000000

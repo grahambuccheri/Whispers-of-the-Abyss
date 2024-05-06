@@ -21,6 +21,9 @@ namespace Map_Gen
     // it provides a lot of utility.
     public class MapGenerator : MonoBehaviour
     {
+        public bool debugMode = false;
+        public bool animateTerrain = false;
+        
         [SerializeField] private GameObject debugMarker;
         public GeneratorSetting settings;
         
@@ -75,7 +78,10 @@ namespace Map_Gen
             terrain.terrainData = GenerateStartingArea(terrain.terrainData);
             GenerateSpawnLocations(); 
             //IllustrateSpawnLocationsDebug();
-            PopulateSpawnLocations();
+            if (!debugMode)
+            {
+                PopulateSpawnLocations();
+            }
             
             // we need to set the boundary triggers. We will have two. One for the warning, and one for the level leave.
             // create holders
@@ -103,9 +109,15 @@ namespace Map_Gen
         // TODO move all here in this from update to start. It's only in update to debug parameters.
         void Update()
         {
-            terrain.terrainData = GenerateTerrain(terrain.terrainData);
-            terrain.terrainData = GenerateStartingArea(terrain.terrainData);
-            //settings.offset += new Vector2(2 * Time.deltaTime, 2 * Time.deltaTime); this animates the terrain, Just for fun lol.
+            if (debugMode)
+            {
+                terrain.terrainData = GenerateTerrain(terrain.terrainData);
+                terrain.terrainData = GenerateStartingArea(terrain.terrainData);
+                if (animateTerrain)
+                {
+                    settings.offset += new Vector2(2 * Time.deltaTime, 2 * Time.deltaTime); //this animates the terrain, Just for fun lol.
+                }
+            }
         }
 
         // returns a TerrainData object with the procedurally generated terrain.

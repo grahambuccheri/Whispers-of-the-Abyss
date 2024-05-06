@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d2417c04d54c078b4591eb9bdea76, type: 3}
   m_Name: CollectableBlackBox
   m_EditorClassIdentifier: 
-  spawnable: {fileID: 1767575039943736778, guid: 7808befa5d7109c4d8949e7b2f460748, type: 3}
+  spawnable: {fileID: 3050684353180449212, guid: b7c06923628ce41bbbc785276f7e19ae, type: 3}
   spawnOffset: {x: 0, y: 0, z: 0}
   baseRotation: {x: 0, y: 0, z: 0}
   xzVariance: 10
