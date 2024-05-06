@@ -16,5 +16,5 @@ MonoBehaviour:
   toolOffset: {x: 0, y: -0.17, z: 0.32}
   distanceFromCamera: 0.95
   toolRotation: {x: -90, y: 0, z: 0}
-  toolSprite: {fileID: 0}
+  toolSprite: {fileID: 21300000, guid: c2925b5de1b34b94e9fc54d30728bdc5, type: 3}
   interactDistance: 0
