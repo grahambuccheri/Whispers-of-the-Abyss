@@ -11,6 +11,7 @@ TagManager:
   - Terrain
   - PlayerObject
   - Hide
+  - blackbox
   layers:
   - Default
   - TransparentFX
