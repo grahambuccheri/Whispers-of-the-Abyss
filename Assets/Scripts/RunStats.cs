@@ -9,12 +9,15 @@ public class RunStats : ScriptableObject
     public int score;
 
     public int credits;
+
+    public int currentDay;
     
     // Call this on start game!
     public void Reset()
     {
         score = 0;
         credits = 0;
+        currentDay = 1;
     }
 
     public void PickupItem(int itemScore, int worth)
