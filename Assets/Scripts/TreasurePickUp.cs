@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TreasurePickUp : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class TreasurePickUp : MonoBehaviour
     public float pickUpSpeed;
     public float pickUpDistance;
 
-    public int numTreausre;
+    [FormerlySerializedAs("numTreausre")] public int numTreasure;
 
     public GameObject spawnLocation; // Gameobject that will help spawn other instances of the model
 
@@ -23,7 +24,7 @@ public class TreasurePickUp : MonoBehaviour
 
             if (Vector3.Distance(transform.position, treasure.transform.position) < pickUpDistance)
             {
-                numTreausre += 1;
+                numTreasure += 1;
                 Destroy(treasure);
 
                 Instantiate(holdableBlackBox, spawnLocation.transform.position, Quaternion.Euler(new Vector3(-90, 0f, 0f)));
