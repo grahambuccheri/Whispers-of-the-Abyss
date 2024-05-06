@@ -33983,6 +33983,7 @@ GameObject:
   - component: {fileID: 1171076655}
   - component: {fileID: 1171076656}
   - component: {fileID: 1171076657}
+  - component: {fileID: 1171076658}
   m_Layer: 0
   m_Name: RemoteSubmarine
   m_TagString: Submarine
@@ -34225,6 +34226,18 @@ MonoBehaviour:
   panelObject: {fileID: 899160484}
   submarineController: {fileID: 0}
   controlPanel: {fileID: 0}
+--- !u!114 &1171076658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171076645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bc3a8001bbe43d8a58469e6eab8091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1203159343
 GameObject:
   m_ObjectHideFlags: 0

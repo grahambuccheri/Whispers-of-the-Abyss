@@ -5,20 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    private GameObject controlsMenu;
     private GameObject pauseMenu;
-    //private GameObject controlsMenu;
-    private GameObject playerControlsMenu;
-    private GameObject subControlsMenu;
+    // private GameObject loading;
+
+    public GameObject pauseMenuUI;
+    public GameObject controls;
 
     public static bool GameIsPaused = false;
 
-    public GameObject pauseMenuUI;
-
     void Start (){
-        //mainMenu = GameObject.Find("PauseCanvas");
-        //controlsMenu = GameObject.Find("ControlsCanvas");
+        pauseMenu = GameObject.Find("PauseMenu");
+        controlsMenu = GameObject.Find("ControlsCanvas");
+
+        controlsMenu.GetComponent<Canvas>().enabled = false;
 
         pauseMenuUI.SetActive(false);
+        pauseMenu.GetComponent<Canvas>().enabled = false;
+        controlsMenu.GetComponent<Canvas>().enabled = false;
+
         Cursor.visible = false;
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,34 +43,6 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    public void LoadMenu()
-    {
-        Time.timeScale = 1f;
-        // Time.timeScale = 0f;
-        GameIsPaused = true;
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void ShowPlayerControls()
-    {
-        pauseMenu.GetComponent<Canvas>().enabled = false;
-        subControlsMenu.GetComponent<Canvas>().enabled = false;
-        playerControlsMenu.GetComponent<Canvas>().enabled = true;
-    }
-
-    public void ShowSubControls()
-    {
-        pauseMenu.GetComponent<Canvas>().enabled = false;
-        playerControlsMenu.GetComponent<Canvas>().enabled = false;
-        subControlsMenu.GetComponent<Canvas>().enabled = true;
-    }
-
-    public void BackButton()
-    {
-        //controlsMenu.GetComponent<Canvas>().enabled = false;
-        pauseMenu.GetComponent<Canvas>().enabled = true;
-    }
-
     void Resume(){
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -77,6 +54,8 @@ public class PauseMenu : MonoBehaviour
 
     void Pause(){
         pauseMenuUI.SetActive(true);
+        pauseMenu.GetComponent<Canvas>().enabled = true;
+
         Time.timeScale = 0f;
         GameIsPaused = true;
 
@@ -84,7 +63,25 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
     }
 
-    
+    public void LoadMenu()
+    {
+        Time.timeScale = 1f;
+        // Time.timeScale = 0f;
+        GameIsPaused = true;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void BackButton()
+    {
+        pauseMenu.GetComponent<Canvas>().enabled = true;
+        controlsMenu.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void LoadControls()
+    {
+        pauseMenu.GetComponent<Canvas>().enabled = false;
+        controlsMenu.GetComponent<Canvas>().enabled = true;
+    }
 
     public void QuitGame()
     {
