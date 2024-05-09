@@ -11,6 +11,7 @@ public class MainMenuLogic : MonoBehaviour
     private GameObject creditsMenu;
     public AudioSource buttonSound;
     public SceneFader sceneFader;
+    public bool DebugMode;
 
     void Start()
     {
@@ -35,8 +36,8 @@ public class MainMenuLogic : MonoBehaviour
         buttonSound.Play();
         
         runInformation.Reset();
-        
-        sceneFader.FadeToScene("Playspace");
+        if (!DebugMode) { sceneFader.FadeToScene("Playspace"); }
+        else { sceneFader.FadeToScene("DebugPlayspace"); }
     }
 
     public void CreditsButton()

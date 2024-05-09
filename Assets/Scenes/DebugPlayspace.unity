@@ -1058,7 +1058,7 @@ MonoBehaviour:
   debugMode: 0
   animateTerrain: 0
   debugMarker: {fileID: 0}
-  settings: {fileID: 11400000, guid: 38fb7045427744b4eb9071e89fb913dd, type: 2}
+  settings: {fileID: 11400000, guid: 06a95760366594d5fbcb1e1e2246cd9d, type: 2}
 --- !u!154 &269168581
 TerrainCollider:
   m_ObjectHideFlags: 0
